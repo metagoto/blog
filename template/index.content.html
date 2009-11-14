@@ -1,0 +1,27 @@
+<ul>
+{% for (i in posts) : %}
+<li class="post">
+	<h2><a href="/post/{%= posts[i]._id %}">{%= posts[i].title %}</a></h2>
+	<h3>{%= posts[i].subtitle %}</h3>
+	<div class="meta">{%= posts[i].date.toDateString() %}, filled under
+	 	{%:r= posts[i].cats.map(function (t) {
+			return '<a href="/category/'+t._id+'">'+t.name+'</a>';
+		}).join(", ") %}.
+	{%= posts[i].numComs %} comment{%= posts[i].numComs > 1 ? "s" : ""%}
+	</div>
+	<div class="entry">{%:r= posts[i].content %}</div>
+	<div class="foot">tags {%:r= posts[i].tags.map(function (t) {
+		return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
+	}).join(", ") %}</div>
+</li>
+{% end %}
+</ul>
+
+<div id="pagi">
+{% if (prevPageNum) : %}
+<span class="prev"><a href="/page/{%= prevPageNum %}">&#171; newer</a></span>
+{% end %}
+{% if (nextPageNum) : %}
+<span class="next"><a href="/page/{%= nextPageNum %}">older &#187;</a></span>
+{% end %}
+</div>

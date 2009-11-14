@@ -1,0 +1,50 @@
+
+<div class="post">
+    <h2><a href="/post/{%= post._id %}">{%= post.title %}</a></h2>
+	<h3>{%= post.subtitle %}</h3>
+	<div class="meta">{%= post.date.toDateString() %}, filled under
+	 	{%:r= post.cats.map(function (t) {
+			return '<a href="/category/'+t._id+'">'+t.name+'</a>';
+		}).join(", ") %}.
+	{%= post.numComs %} comment{%= post.numComs > 1 ? "s" : ""%}
+	</div>
+	<div class="entry">{%:r= post.content %}</div>
+	<div class="foot">tags {%:r= post.tags.map(function (t) {
+		return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
+	}).join(", ") %}</div>
+</div>
+
+{% if (post.numComs): %}<h3 id="comments" class="info">Comments</h3>{%end%}
+
+<ol class="coms">
+{% for (k in post.coms) : %}
+<li>
+<strong>{% if (post.coms[k].site) : %}
+<a href="{%= post.coms[k].site %}" rel="nofollow">{%= post.coms[k].user %}</a>{% else : %}{%= post.coms[k].user %}{% end %}</strong>, 
+{%= post.coms[k].date.toDateString().toLowerCase() %}
+<div>{%:h:m= post.coms[k].content %}</div>
+</li>
+{% end %}
+</ol>
+
+<h3 class="info">Add a comment</h3>
+<div id="preview-comment"> </div>
+
+<form method="post" action="/post/{%= post._id %}">
+
+<p><input type="text" id="email" name="email" value="" />
+<label for="email">Username*</label></p>
+
+<p><input type="text" id="user" name="user" value="" />
+<label for="user">Email*</label></p>
+
+<p><input type="text" id="site" name="site" value="" />
+<label for="site">Website</label></p>
+
+<p><textarea id="com_con" name="com_con" cols="50" rows="20"></textarea></p>
+
+<p><input type="submit" id="submit" name="submit" value="Send" />
+<input type="button" id="previewb" value="Preview"/>
+<a href="/help">Formating help</a></p>
+
+</form>

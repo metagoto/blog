@@ -1,0 +1,30 @@
+<ul>
+<li><a href="/">/home</a></li>
+<li><a href="/about">/about</a></li>
+<li><a href="/check">/check</a></li>
+<li><a href="/reset">/reset</a></li>
+</ul>
+
+<h3>Feeds</h3>
+<ul>
+<li><a href="">Posts</a></li>
+<li><a href="">Comments</a></li>
+</ul>
+
+<h3>Categories</h3>
+<ul>{% for (i in cats) : %}
+<li><a href="/category/{%= cats[i]._id %}">{%= cats[i].name %}</a> ({%= cats[i].count %})</li>
+{% end %}</ul>
+
+<h3>Tags</h3>
+<ul class="tag">{% for (i in tags) : %}
+<li><a href="/tag/{%= tags[i]._id %}" style="font-size:{%= 80+tags[i].count*4 %}%;" title="{%= tags[i].count %} entries">{%= tags[i].name %}</a></li>
+{% end %}</ul>
+
+<h3>Follow me</h3>
+<ul class="strike">
+<li>Twitter</li>
+<li>identi.ca</li>
+<li>facebook</li>
+<li>Delicious</li>
+</ul>

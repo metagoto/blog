@@ -1,0 +1,83 @@
+
+.jsh-php .comment { color: #008000; }
+.jsh-php .single-string { color: #690000; }
+.jsh-php .double-string { color: #690000; }
+.jsh-php .number { color: #800000; }
+.jsh-php .operator { color: #008000; }
+.jsh-php .keyword { color: #000080; }
+.jsh-php .variable { color: #760076; }
+.jsh-php .tag { color: #008000; }
+
+.jsh-js .comment { color: #FF7D27; }
+.jsh-js .string { color: #FF9E7B; }
+.jsh-js .number { color: #94FE9A; }
+.jsh-js .operator { color: #EBDB8D; }
+.jsh-js .keyword { color: #9CCFF4; }
+.jsh-js .regex { color: #888; }
+
+.jsh-css .comment { color: #FF7D27; }
+.jsh-css .string { color: #FF9E7B; }
+.jsh-css .operator { color: #EBDB8D; }
+.jsh-css .keyword { color: #9CCFF4; }
+.jsh-css .id { color: #94FE9A; }
+.jsh-css .class { color: #AEC4DE; }
+.jsh-css .color { color: #888; }
+.jsh-css .media { color: #7DFDFA; }
+.jsh-css .pseudo { color: #7DFDFA; }
+
+.jsh-cpp .comment { color: #FF7D27; }
+.jsh-cpp .double-string { color: #FF9E7B; }
+.jsh-cpp .single-string { color: #AA6950; }
+.jsh-cpp .number { color: #94FE9A; }
+.jsh-cpp .operator { color: #EBDB8D; }
+.jsh-cpp .keyword { color: #9CCFF4; }
+.jsh-cpp .preproc { color: #7DFDFA; }
+
+.jsh-sql .comment { color: #008000; }
+.jsh-sql .string { color: #800000; }
+.jsh-sql .number { color: #f00; }
+.jsh-sql .operator { color: #008000; }
+.jsh-sql .variable { color: #008fff; }
+.jsh-sql .keyword { color: #00f; }
+
+.jsh-xml .comment { color: #FF7D27; }
+.jsh-xml .tag { color: #aaa; }
+.jsh-xml .prefix { color: #94FE9A; }
+.jsh-xml .tag-name { color: #9CCFF4; }
+.jsh-xml .attribute { color: #EBDB8D; }
+.jsh-xml .attribute-value { color: #FF9E7B; }
+.jsh-xml .cdata { color: #888; }
+.jsh-xml .pi { color: #AEC4DE; font-style: italic; }
+.jsh-xml .doctype { color: #7DFDFA; }
+.jsh-xml .entity { color: #7DFDFA; }
+
+/* embedded */
+
+.jsh-xml .php .comment { color: #FF7D27; }
+.jsh-xml .php .single-string { color: #AA6950; }
+.jsh-xml .php .double-string { color: #FF9E7B; }
+.jsh-xml .php .number { color: #94FE9A; }
+.jsh-xml .php .operator { color: #EBDB8D; }
+.jsh-xml .php .keyword { color: #9CCFF4; }
+.jsh-xml .php .variable { color: #888; }
+.jsh-xml .php .tag { color: #7DFDFA; }
+
+.jsh-xml .js .comment { color: #FF7D27; }
+.jsh-xml .js .string { color: #FF9E7B; }
+.jsh-xml .js .number { color: #94FE9A; }
+.jsh-xml .js .operator { color: #EBDB8D; }
+.jsh-xml .js .keyword { color: #9CCFF4; }
+.jsh-xml .js .regex { color: #888; }
+
+.jsh-xml .css .comment { color: #FF7D27; }
+.jsh-xml .css .string { color: #FF9E7B; }
+.jsh-xml .css .operator { color: #EBDB8D; }
+.jsh-xml .css .keyword { color: #9CCFF4; }
+.jsh-xml .css .id { color: #94FE9A; }
+.jsh-xml .css .class { color: #AEC4DE; }
+.jsh-xml .css .color { color: #888; }
+.jsh-xml .css .media { color: #7DFDFA; }
+.jsh-xml .css .pseudo { color: #7DFDFA; }
+
+
+

@@ -1,0 +1,36 @@
+
+
+<div class="wrap">
+    
+<div class="col">
+    <h3>Latest posts</h3>
+    <ul>
+        {% for (i in recentPosts) :%}
+        <li><a href="/post/{%= recentPosts[i]._id %}">{%= recentPosts[i].title %}</a></li>
+        {%end%}
+    </ul>
+</div>
+
+<div class="col">
+    <h3>Latest comments</h3>
+    <ul>
+        {% for (i in recentComs) :%}
+        <li><a href="/post/{%= recentComs[i]._id %}#comments">{%= recentComs[i].title %}</a></li>
+        {%end%}
+    </ul>
+</div>
+
+<div class="col">
+    <h3>The rest</h3>
+    <ul>
+    <li>dsdsds df</li>
+    <li>dsdsds df</li>
+    </ul>
+</div>
+    
+</div>
+
+<div class="end">
+copyright 2009 <a href="http://runpac.com">runpac.com</a>. site optimized for web browsers. <a href="http://github.com/metagoto/blog">source code</a>. <a href="#">top</a>
+</div>
+    
