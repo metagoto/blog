@@ -76,11 +76,9 @@ SOURCES = [
 
 CXXFLAGS = [
   '-Wall',
-  '-s',
   '-std=c++0x',
   '-O3',
   '-fomit-frame-pointer',
-  '-fPIC',
   '-fno-strict-aliasing'
 ]
 

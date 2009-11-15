@@ -1,13 +1,5 @@
 #pragma once
 
-#include <algorithm>
-
-#include <fcgixx/policy/js_router.hpp>
-#include <fcgixx/policy/simple_dispatcher.hpp>
-
-#include <fcgixx/application.hpp>
-
-
 namespace runpac {
 
 // bacled!

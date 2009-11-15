@@ -24,7 +24,7 @@ blog::blog()
     , mod(db)
 {
 
-    dispatcher::bind("__500__",   &blog::on_error500); // special
+    dispatcher::bind("__500__",   &blog::on_error500);
     dispatcher::bind("error",     &blog::on_error404);
     dispatcher::bind("about",     &blog::on_about);
     dispatcher::bind("help",      &blog::on_help);
@@ -36,6 +36,7 @@ blog::blog()
     dispatcher::bind("tag",       &blog::on_tag);
     dispatcher::bind("post_post", &blog::on_post_post);
     dispatcher::bind("preview",   &blog::on_com_preview);
+    dispatcher::set_fatal("__500__");
 
     router::set_js_source(file_loader::load("js/router.js"));
 
@@ -286,6 +287,10 @@ bool blog::on_reset()
     response << "now clearing...<br/>\n";
     view.clear();
     cache.clear();
+
+    response << cookie("daname");
+    response << cookie("daname2");
+
     return on_index();
 }
 
@@ -293,6 +298,20 @@ bool blog::on_check()
 {
     response << cache.check();
     response << cache.check_list();
+
+    response << cookie("daname", "da value!");
+    response << cookie("daname2", "davalue!2");
+
+    const params_type& p = request.get_params();
+    for (params_type::const_iterator i(p.begin()), e(p.end()); i!= e; ++i) {
+        response << i->first << " : " << i->second << "\n";
+    }
+
+    const params_type& c = request.get_cookie_params();
+    for (params_type::const_iterator i(c.begin()), e(c.end()); i!= e; ++i) {
+        response << i->first << " : " << i->second << "\n";
+    }
+
     return true;
 }
 

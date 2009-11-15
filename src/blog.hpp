@@ -27,6 +27,7 @@ typedef fcgixx::templater<fcgixx::filesys_loader, engine_t, cache_t> js_template
 struct blog
     : public fcgixx::application<
         blog
+      , fcgixx::http_request
       , fcgixx::policy::js_router
       , fcgixx::policy::simple_dispatcher
     >

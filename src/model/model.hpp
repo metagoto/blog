@@ -1,8 +1,8 @@
 #pragma once
 
 #include <mongo/client/dbclient.h>
-#include <fcgixx/file_loader.hpp>
-#include <fcgixx/http_request.hpp>
+//#include <fcgixx/file_loader.hpp>
+//#include <fcgixx/http_request.hpp>
 
 #include <boost/algorithm/string.hpp>
 
