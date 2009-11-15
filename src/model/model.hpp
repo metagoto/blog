@@ -1,12 +1,8 @@
 #pragma once
 
-#include <mongo/client/dbclient.h>
-//#include <fcgixx/file_loader.hpp>
-//#include <fcgixx/http_request.hpp>
-
 #include <boost/algorithm/string.hpp>
-
 #include <boost/tr1/regex.hpp>
+#include <mongo/client/dbclient.h>
 
 //#include <boost/xpressive/xpressive_static.hpp>
 //#include <boost/xpressive/xpressive_dynamic.hpp>
