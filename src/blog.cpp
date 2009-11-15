@@ -2,15 +2,14 @@
 #define BOOST_SPIRIT_THREADSAFE
 
 #include <fcgixx/file_loader.hpp>
-#include <fcgixx/conversion.hpp>
-
-#include <fcgixx/templater/modifier/html_esc.hpp>
+#include <fcgixx/conv/json_v8.hpp>
+#include <fcgixx/tpl/modifier/html_esc.hpp>
 
 #include "blog.hpp"
 #include "paginator.hpp"
 #include "modifier/simple_snip.hpp"
 
-#include <fcgixx/mongo_v8.hpp>
+#include <fcgixx/conv/mongo_v8.hpp>
 
 
 namespace runpac {
@@ -41,7 +40,7 @@ blog::blog()
     router::set_js_source(file_loader::load("js/router.js"));
 
     view.set_format("template/%1%.html");
-    view.register_modifier("h", modifier::html_esc());
+    view.register_modifier("h", tpl::modifier::html_esc());
     view.register_modifier("m", simple_snip());
 }
 
@@ -79,7 +78,6 @@ bool blog::on_index()
 {
     const string& key = string("index") + request.get_param<string>("page", "1");
     if (!cache.has(key)) {
-        //view.clear_context();
         if (!cache.has("index")) cache.add("index", "");
 
         int num_posts = mod.count_posts();
@@ -287,10 +285,6 @@ bool blog::on_reset()
     response << "now clearing...<br/>\n";
     view.clear();
     cache.clear();
-
-    response << cookie("daname");
-    response << cookie("daname2");
-
     return on_index();
 }
 
@@ -299,14 +293,10 @@ bool blog::on_check()
     response << cache.check();
     response << cache.check_list();
 
-    response << cookie("daname", "da value!");
-    response << cookie("daname2", "davalue!2");
-
     const params_type& p = request.get_params();
     for (params_type::const_iterator i(p.begin()), e(p.end()); i!= e; ++i) {
         response << i->first << " : " << i->second << "\n";
     }
-
     const params_type& c = request.get_cookie_params();
     for (params_type::const_iterator i(c.begin()), e(c.end()); i!= e; ++i) {
         response << i->first << " : " << i->second << "\n";
