@@ -9,7 +9,17 @@
 //#include <boost/xpressive/xpressive_dynamic.hpp>
 //#include <regex>
 
+
 namespace runpac {
+
+
+static const char* ns_db   = "blogx";
+static const char* ns_post = "blogx.post";
+static const char* ns_cat  = "blogx.cat";
+static const char* ns_tag  = "blogx.tag";
+static const char* ns_user = "blogx.user";
+static const char* ns_rcom = "blogx.recCom";
+static const char* ns_sysjs= "blogx.system.js";
 
 
 struct model
@@ -17,20 +27,15 @@ struct model
 
     typedef mongo::BSONElement entity;
 
-    model(mongo::DBClientConnection& db)
-        : db(db)
-        , db_ns  ("blogx")
-        , post_ns("blogx.post")
-        , cat_ns ("blogx.cat")
-        , tag_ns ("blogx.tag")
-        , system_js_ns("blogx.system.js")
+    model()
+        : db(true)
     {
         db.connect("localhost");
 
-        db.ensureIndex("blogx.post", BSON("date" << 1));
-        db.ensureIndex("blogx.post", BSON("_cats" << 1));
-        db.ensureIndex("blogx.post", BSON("_tags" << 1));
-        db.ensureIndex("blogx.post", BSON("coms.date" << 1));
+        db.ensureIndex(ns_post, BSON("date" << 1));
+        db.ensureIndex(ns_post, BSON("_cats" << 1));
+        db.ensureIndex(ns_post, BSON("_tags" << 1));
+        db.ensureIndex(ns_post, BSON("coms.date" << 1));
 
         register_mongo_func("fillPostMeta");
         register_mongo_func("getPosts");
@@ -46,22 +51,22 @@ struct model
 
     int count_posts()
     {
-        return db.count(post_ns);
+        return db.count(ns_post);
     }
 
     int count_posts_for_cat(const std::string& id)
     {
-        return db.count(post_ns, BSON("_cats" << id));
+        return db.count(ns_post, BSON("_cats" << id));
     }
 
     int count_posts_for_tag(const std::string& id)
     {
-        return db.count(post_ns, BSON("_tags" << id));
+        return db.count(ns_post, BSON("_tags" << id));
     }
 
     bool post_exists(const std::string& id)
     {
-        return db.count(post_ns, BSON("_id" << id)) == 1;
+        return db.count(ns_post, BSON("_id" << id)) == 1;
     }
 
     entity get_posts(int skip = 0, int limit = 10)
@@ -69,7 +74,7 @@ struct model
         static mongo::BSONObj info;
         mongo::BSONElement ret;
         mongo::BSONObj args = BSON("0" << skip << "1" << limit);
-        db.eval(db_ns, "function (skip, limit) { return getPosts(skip, limit); }", info, ret, &args); //bool ok
+        db.eval(ns_db, "function (skip, limit) { return getPosts(skip, limit); }", info, ret, &args); //bool ok
         return ret;
     }
 
@@ -78,7 +83,7 @@ struct model
         static mongo::BSONObj info;
         mongo::BSONElement ret;
         mongo::BSONObj args = BSON("0" << limit);
-        db.eval(db_ns, "function (limit) { return getRecentPosts(limit); }", info, ret, &args); //bool ok
+        db.eval(ns_db, "function (limit) { return getRecentPosts(limit); }", info, ret, &args); //bool ok
         return ret;
     }
 
@@ -87,7 +92,7 @@ struct model
         static mongo::BSONObj info;
         mongo::BSONElement ret;
         mongo::BSONObj args = BSON("0" << limit);
-        db.eval(db_ns, "function (limit) { return getRecentComments(limit); }", info, ret, &args); //bool ok
+        db.eval(ns_db, "function (limit) { return getRecentComments(limit); }", info, ret, &args); //bool ok
         return ret;
     }
 
@@ -96,7 +101,7 @@ struct model
         static mongo::BSONObj info;
         mongo::BSONElement ret;
         mongo::BSONObj args = BSON("0" << id);
-        db.eval(db_ns, "function (id) { return getPost(id); }", info, ret, &args);
+        db.eval(ns_db, "function (id) { return getPost(id); }", info, ret, &args);
         return ret;
     }
 
@@ -105,7 +110,7 @@ struct model
         static mongo::BSONObj info;
         mongo::BSONElement ret;
         mongo::BSONObj args = BSON("0" << id << "1" << skip << "2" << limit);
-        db.eval(db_ns, "function (id, skip, limit) { return getPostsForCat(id, skip, limit); }", info, ret, &args);
+        db.eval(ns_db, "function (id, skip, limit) { return getPostsForCat(id, skip, limit); }", info, ret, &args);
         return ret;
     }
 
@@ -114,7 +119,7 @@ struct model
         static mongo::BSONObj info;
         mongo::BSONElement ret;
         mongo::BSONObj args = BSON("0" << id << "1" << skip << "2" << limit);
-        db.eval(db_ns, "function (id, skip, limit) { return getPostsForTag(id, skip, limit); }", info, ret, &args);
+        db.eval(ns_db, "function (id, skip, limit) { return getPostsForTag(id, skip, limit); }", info, ret, &args);
         return ret;
     }
 
@@ -123,7 +128,7 @@ struct model
         static mongo::BSONObj info;
         mongo::BSONElement ret;
         mongo::BSONObj args;
-        db.eval(db_ns, "function () { return getTagCloud(); }", info, ret, &args);
+        db.eval(ns_db, "function () { return getTagCloud(); }", info, ret, &args);
         return ret;
     }
 
@@ -132,19 +137,19 @@ struct model
         static mongo::BSONObj info;
         mongo::BSONElement ret;
         mongo::BSONObj args;
-        db.eval(db_ns, "function () { return getCatCloud(); }", info, ret, &args);
+        db.eval(ns_db, "function () { return getCatCloud(); }", info, ret, &args);
         return ret;
     }
 
     std::string get_cat_name(const std::string& id)
     {
-        const mongo::BSONObj& obj = db.findOne(cat_ns, BSON("_id" << id));
+        const mongo::BSONObj& obj = db.findOne(ns_cat, BSON("_id" << id));
         return obj.getField("name").valuestr();
     }
 
     std::string get_tag_name(const std::string& id)
     {
-        const mongo::BSONObj& obj = db.findOne(tag_ns, BSON("_id" << id));
+        const mongo::BSONObj& obj = db.findOne(ns_tag, BSON("_id" << id));
         return obj.getField("name").valuestr();
     }
 
@@ -228,7 +233,7 @@ struct model
 
         const string& site = format_comment_site(params.at("site"));
 
-        db.update(post_ns, BSON("_id" << id),
+        db.update(ns_post, BSON("_id" << id),
             BSON("$push" << BSON( "coms" <<
                 BSON("user" << user <<
                      "email"<< email <<
@@ -239,9 +244,14 @@ struct model
             )
         ));
 
-        db.insert("blogx.recCom", BSON("_id" << id));
+        db.insert(ns_rcom, BSON("_id" << id));
 
         return true;
+    }
+
+    bool can_login(const std::string& user, const std::string& pass)
+    {
+        return db.count(ns_user, BSON("_id" << user << "pass" << pass)) == 1;
     }
 
 
@@ -255,18 +265,11 @@ private:
         mongo::BSONObjBuilder o;
         o.append("_id", name);
         o.appendCode("value", code.c_str());
-        db.update(system_js_ns, query, o.obj(), 1);
+        db.update(ns_sysjs, query, o.obj(), 1);
     }
 
 
-    mongo::DBClientConnection& db;
-
-    const std::string db_ns;
-    const std::string post_ns;
-    const std::string cat_ns;
-    const std::string tag_ns;
-    const std::string system_js_ns;
-
+    mongo::DBClientConnection db;
 
 };
 

@@ -20,7 +20,8 @@ routes = {
   },
 
   preview: {
-    pat: /^preview$/
+    pat: /^preview$/,
+    GET: "blank"
   },
 
   about: {
@@ -31,11 +32,16 @@ routes = {
     pat: /^help$/
   },
 
-  reset: { // reset
+  login: {
+    pat: /^login$/,
+    POST: "try_login"
+  },
+
+  reset: { // tmp reset
     pat: /^reset$/
   },
   
-  check: { // check cache
+  check: { // tmp check cache
     pat: /^check$/
   },
 

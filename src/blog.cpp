@@ -19,34 +19,38 @@ using namespace runpac::fcgixx;
 
 
 blog::blog()
-    : db(true) // auto reconnect
-    , mod(db)
+    : sess(request, response) //////
 {
 
-    dispatcher::bind("__500__",   &blog::on_error500);
-    dispatcher::bind("error",     &blog::on_error404);
-    dispatcher::bind("about",     &blog::on_about);
-    dispatcher::bind("help",      &blog::on_help);
-    dispatcher::bind("index",     &blog::on_index);
-    dispatcher::bind("reset",     &blog::on_reset);
-    dispatcher::bind("check",     &blog::on_check);
-    dispatcher::bind("post",      &blog::on_post);
-    dispatcher::bind("category",  &blog::on_category);
-    dispatcher::bind("tag",       &blog::on_tag);
-    dispatcher::bind("post_post", &blog::on_post_post);
-    dispatcher::bind("preview",   &blog::on_com_preview);
+    dispatcher::bind("__500__",  &blog::on_error500);
+    dispatcher::bind("error",    &blog::on_error404);
+    dispatcher::bind("about",    &blog::on_about);
+    dispatcher::bind("help",     &blog::on_help);
+    dispatcher::bind("index",    &blog::on_index);
+    dispatcher::bind("reset",    &blog::on_reset);
+    dispatcher::bind("check",    &blog::on_check);
+    dispatcher::bind("post",     &blog::on_post);
+    dispatcher::bind("category", &blog::on_category);
+    dispatcher::bind("tag",      &blog::on_tag);
+    dispatcher::bind("post_post",&blog::on_post_post);
+    dispatcher::bind("preview",  &blog::on_com_preview);
+    dispatcher::bind("blank",    &blog::on_blank);
+
+    dispatcher::bind("login",    &blog::on_login);
+    dispatcher::bind("try_login",&blog::on_try_login);
+
     dispatcher::set_fatal("__500__");
 
-    router::set_js_source(file_loader::load("js/router.js"));
+    router::set_source(file_loader::load("js/router.js"));
 
     view.set_format("template/%1%.html");
     view.register_modifier("h", tpl::modifier::html_esc());
     view.register_modifier("m", simple_snip());
 }
 
+
 blog::~blog()
 {
-
 }
 
 
@@ -267,6 +271,7 @@ bool blog::on_help()
     return true;
 }
 
+
 bool blog::on_com_preview()
 {
     view.assign("user", mod.format_comment_user(request.get_post_param("email")));
@@ -278,13 +283,22 @@ bool blog::on_com_preview()
     return true;
 }
 
+
+bool blog::on_blank()
+{
+    response << header("Content-type", "text/html; charset=utf-8");
+    return true;
+}
+
+
 bool blog::on_reset()
 {
     response << cache.check();
     response << cache.check_list();
-    response << "now clearing...<br/>\n";
+    response << "now clearing...\n";
     view.clear();
     cache.clear();
+
     return on_index();
 }
 
@@ -292,6 +306,10 @@ bool blog::on_check()
 {
     response << cache.check();
     response << cache.check_list();
+
+    sess.start();
+    response << sess.check();
+    response << "logged? " << sess.get<string>("logged", "0") << "\n";
 
     const params_type& p = request.get_params();
     for (params_type::const_iterator i(p.begin()), e(p.end()); i!= e; ++i) {
@@ -305,6 +323,40 @@ bool blog::on_check()
     return true;
 }
 
+
+bool blog::on_login()
+{
+    response << header("Content-type", "text/html; charset=utf-8");
+
+    sess.start();
+    if (!sess.get</*bool*/>("logged").empty()) {
+        response << view.render("logout");
+    }
+    else {
+        response << view.render("login");
+    }
+    return true;
+}
+
+
+bool blog::on_try_login()
+{
+    sess.start();
+    if (!sess.get</*bool*/>("logged").empty()) {
+        response << "already logged";
+    }
+    else {
+        if (mod.can_login(request.get_post_param("user"), request.get_post_param("pass"))) {\
+            sess.set("logged", "1");
+            response << "login OK";
+        }
+        else {
+            response << "login FAILED";
+        }
+    }
+    return true;
+
+}
 
 
 void blog::make_sidebar()
