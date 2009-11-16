@@ -346,7 +346,7 @@ bool blog::on_try_login()
         response << "already logged";
     }
     else {
-        if (mod.can_login(request.get_post_param("user"), request.get_post_param("pass"))) {\
+        if (mod.can_login(request.get_post_param("user"), request.get_post_param("pass"))) {
             sess.set("logged", "1");
             response << "login OK";
         }
