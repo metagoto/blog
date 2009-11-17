@@ -1,8 +1,11 @@
 #pragma once
 
-#include <fcgixx/application.hpp>
-#include <fcgixx/http_request.hpp>
-#include <fcgixx/http_response.hpp>
+#include <fcgixx/app.hpp>
+//#include <fcgixx/http_request.hpp>
+
+#include <fcgixx/request/http_simple.hpp>
+
+#include <fcgixx/response/http_response.hpp>
 #include <fcgixx/router/js.hpp>
 #include <fcgixx/dispatcher/simple.hpp>
 #include <fcgixx/tpl/v8_tpl.hpp>
@@ -16,10 +19,10 @@ namespace runpac {
 
 
 struct blog
-    : public fcgixx::application<
+    : public fcgixx::app<
         blog
-      , fcgixx::http_request
-      , fcgixx::http_response
+      , fcgixx::request::http_simple
+      , fcgixx::response::http_response
       , fcgixx::router::js
       , fcgixx::dispatcher::simple
     >

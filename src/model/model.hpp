@@ -3,7 +3,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/tr1/regex.hpp>
 #include <mongo/client/dbclient.h>
-#include <fcgixx/file_loader.hpp>
+#include <fcgixx/util/file_loader.hpp>
 
 //#include <boost/xpressive/xpressive_static.hpp>
 //#include <boost/xpressive/xpressive_dynamic.hpp>
@@ -260,7 +260,8 @@ private:
 
     void register_mongo_func(const char* name)
     {
-        const std::string& code = fcgixx::file_loader::load(std::string("js/mongo/") + name + ".js");
+        const std::string& code =
+            fcgixx::util::file_loader::load(std::string("js/mongo/") + name + ".js");
         mongo::BSONObj query = BSON("_id" << name);
         mongo::BSONObjBuilder o;
         o.append("_id", name);

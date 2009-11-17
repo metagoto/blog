@@ -1,7 +1,7 @@
 
 #define BOOST_SPIRIT_THREADSAFE
 
-#include <fcgixx/file_loader.hpp>
+#include <fcgixx/util/file_loader.hpp>
 #include <fcgixx/conv/json_v8.hpp>
 #include <fcgixx/tpl/modifier/html_esc.hpp>
 
@@ -16,6 +16,7 @@ namespace runpac {
 
 using namespace std;
 using namespace runpac::fcgixx;
+using namespace runpac::fcgixx::http;
 
 
 blog::blog()
@@ -41,7 +42,7 @@ blog::blog()
 
     dispatcher::set_fatal("__500__");
 
-    router::set_source(file_loader::load("js/router.js"));
+    router::set_source(util::file_loader::load("js/router.js"));
 
     view.set_format("template/%1%.html");
     view.register_modifier("h", tpl::modifier::html_esc());
