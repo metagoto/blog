@@ -12,8 +12,8 @@ int main (int, char**)
     std::cout.rdbuf(cout_file.rdbuf());
 
     try {
-        runpac::fcgixx::prog<runpac::blog> app;
-        app.run();
+        runpac::fcgixx::prog<runpac::blog> prog;
+        prog.run();
     }
     catch(const std::exception& e)  {
         std::cout << "exception: " << e.what() << std::endl;

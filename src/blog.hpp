@@ -1,11 +1,8 @@
 #pragma once
 
 #include <fcgixx/app.hpp>
-//#include <fcgixx/http_request.hpp>
-
 #include <fcgixx/request/http_simple.hpp>
-
-#include <fcgixx/response/http_response.hpp>
+#include <fcgixx/response/http_simple.hpp>
 #include <fcgixx/router/js.hpp>
 #include <fcgixx/dispatcher/simple.hpp>
 #include <fcgixx/tpl/v8_tpl.hpp>
@@ -22,7 +19,7 @@ struct blog
     : public fcgixx::app<
         blog
       , fcgixx::request::http_simple
-      , fcgixx::response::http_response
+      , fcgixx::response::http_simple
       , fcgixx::router::js
       , fcgixx::dispatcher::simple
     >
