@@ -21,6 +21,7 @@ using namespace runpac::fcgixx::http;
 
 blog::blog()
     : sess(request, response) //////
+    , adm(this)
 {
 
     dispatcher::bind("__500__",  &blog::on_error500);
@@ -36,9 +37,11 @@ blog::blog()
     dispatcher::bind("post_post",&blog::on_post_post);
     dispatcher::bind("preview",  &blog::on_com_preview);
     dispatcher::bind("blank",    &blog::on_blank);
-
     dispatcher::bind("login",    &blog::on_login);
     dispatcher::bind("try_login",&blog::on_try_login);
+
+    dispatcher::bind("admin_index", &admin_type::on_index, adm);
+    dispatcher::bind("admin_edit",  &admin_type::on_edit, adm);
 
     dispatcher::set_fatal("__500__");
 
@@ -106,10 +109,7 @@ bool blog::on_index()
         view.assign("title", "blog.runpac.com");
         cache.add("index", key, view.render("main"));
     }
-
-    response << header("Content-type", "text/html; charset=utf-8");
-    response << cache.get(key);
-    return true;
+    return send(cache.get(key));
 }
 
 
@@ -308,8 +308,11 @@ bool blog::on_check()
     response << cache.check();
     response << cache.check_list();
 
+    //adm.test();
+
+
     sess.start();
-    response << sess.check();
+    //response << sess.check();
     response << "logged? " << sess.get<string>("logged", "0") << "\n";
 
     const params_type& p = request.get_params();
@@ -325,12 +328,12 @@ bool blog::on_check()
 }
 
 
-bool blog::on_login()
+bool blog::on_login() // tmp
 {
     response << header("Content-type", "text/html; charset=utf-8");
 
     sess.start();
-    if (!sess.get</*bool*/>("logged").empty()) {
+    if (sess.get<bool>("logged")) {
         response << view.render("logout");
     }
     else {
@@ -340,11 +343,13 @@ bool blog::on_login()
 }
 
 
-bool blog::on_try_login()
+bool blog::on_try_login() // tmp
 {
     sess.start();
-    if (!sess.get</*bool*/>("logged").empty()) {
-        response << "already logged";
+    if (sess.get<bool>("logged")) {
+        //sess.del("logged");
+        sess.remove();
+        response << "logout OK";
     }
     else {
         if (mod.can_login(request.get_post_param("user"), request.get_post_param("pass"))) {
@@ -356,7 +361,6 @@ bool blog::on_try_login()
         }
     }
     return true;
-
 }
 
 
@@ -382,6 +386,14 @@ void blog::make_footer()
 
     }
     view.assign("footer", cache.get("footer"));
+}
+
+
+bool blog::send(const std::string& s)
+{
+    response << header("Content-type", "text/html; charset=utf-8");
+    response << s;
+    return true;
 }
 
 

@@ -32,6 +32,16 @@ routes = {
     pat: /^help$/
   },
 
+  admin_index: {
+    pat: /^adm$/
+  },
+
+  admin_edit: {
+    pat: /^adm\/edit\/([^\/]+)$/,
+    map: {1: "id"}
+  },
+
+
   login: {
     pat: /^login$/,
     POST: "try_login"

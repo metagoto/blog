@@ -11,6 +11,8 @@
 
 #include "model/model.hpp"
 
+#include "admin/admin.hpp"
+
 
 namespace runpac {
 
@@ -52,6 +54,8 @@ private:
     void make_sidebar();
     void make_footer();
 
+    bool send(const std::string&);
+
     // tmp
     bool on_reset();
     bool on_check();
@@ -66,6 +70,10 @@ private:
     fcgixx::tpl::v8_tpl view;
 
     fcgixx::session::mem_cook<request_type, response_type>::type sess;
+
+    typedef admin<blog> admin_type;
+    friend class admin<blog>;
+    admin_type adm;
 };
 
 

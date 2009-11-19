@@ -251,6 +251,8 @@ struct model
 
     bool can_login(const std::string& user, const std::string& pass)
     {
+        if (!user.size() || user.size() > 40) return false;
+        if (!pass.size() || pass.size() > 40) return false;
         return db.count(ns_user, BSON("_id" << user << "pass" << pass)) == 1;
     }
 
