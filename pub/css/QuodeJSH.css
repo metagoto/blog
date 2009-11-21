@@ -1,37 +1,37 @@
 
-.jsh-php .comment { color: #008000; }
-.jsh-php .single-string { color: #690000; }
-.jsh-php .double-string { color: #690000; }
-.jsh-php .number { color: #800000; }
+.jsh-php .comment { color: #808080; }
+.jsh-php .single-string { color: #800000; }
+.jsh-php .double-string { color: #800000; }
+.jsh-php .number { color: #800080; }
 .jsh-php .operator { color: #008000; }
 .jsh-php .keyword { color: #000080; }
-.jsh-php .variable { color: #760076; }
-.jsh-php .tag { color: #008000; }
+.jsh-php .variable { color: #800080; }
+.jsh-php .tag { color: #808000; }
 
-.jsh-js .comment { color: #FF7D27; }
-.jsh-js .string { color: #FF9E7B; }
-.jsh-js .number { color: #94FE9A; }
-.jsh-js .operator { color: #EBDB8D; }
-.jsh-js .keyword { color: #9CCFF4; }
-.jsh-js .regex { color: #888; }
+.jsh-js .comment { color: #808080; }
+.jsh-js .string { color: #800000; }
+.jsh-js .number { color: #800080; }
+.jsh-js .operator { color: #008000; }
+.jsh-js .keyword { color: #000080; }
+.jsh-js .regex { color: #800080; }
 
-.jsh-css .comment { color: #FF7D27; }
-.jsh-css .string { color: #FF9E7B; }
-.jsh-css .operator { color: #EBDB8D; }
-.jsh-css .keyword { color: #9CCFF4; }
-.jsh-css .id { color: #94FE9A; }
-.jsh-css .class { color: #AEC4DE; }
+.jsh-css .comment { color: #808080; }
+.jsh-css .string { color: #800000; }
+.jsh-css .operator { color: #008000; }
+.jsh-css .keyword { color: #000080; }
+.jsh-css .id { color: #800080; }
+.jsh-css .class { color: #200080; }
 .jsh-css .color { color: #888; }
 .jsh-css .media { color: #7DFDFA; }
 .jsh-css .pseudo { color: #7DFDFA; }
 
-.jsh-cpp .comment { color: #FF7D27; }
-.jsh-cpp .double-string { color: #FF9E7B; }
-.jsh-cpp .single-string { color: #AA6950; }
-.jsh-cpp .number { color: #94FE9A; }
-.jsh-cpp .operator { color: #EBDB8D; }
-.jsh-cpp .keyword { color: #9CCFF4; }
-.jsh-cpp .preproc { color: #7DFDFA; }
+.jsh-cpp .comment { color: #808080; }
+.jsh-cpp .double-string { color: #800000; }
+.jsh-cpp .single-string { color: #800000; }
+.jsh-cpp .number { color: #800080; }
+.jsh-cpp .operator { color: #008000; }
+.jsh-cpp .keyword { color: #000080; }
+.jsh-cpp .preproc { color: #808000; }
 
 .jsh-sql .comment { color: #008000; }
 .jsh-sql .string { color: #800000; }
