@@ -40,13 +40,15 @@ blog::blog()
     dispatcher::bind("login",    &blog::on_login);
     dispatcher::bind("try_login",&blog::on_try_login);
 
-    dispatcher::bind("admin_index", &admin_type::on_index, adm);
-    dispatcher::bind("admin_edit",  &admin_type::on_edit, adm);
+    dispatcher::bind("admin_index",    &admin_type::on_index, adm);
+    dispatcher::bind("admin_edit",     &admin_type::on_edit, adm);
+    dispatcher::bind("admin_edit_post",&admin_type::on_edit_post, adm);
+    dispatcher::bind("admin_new",      &admin_type::on_new, adm);
+    dispatcher::bind("admin_new_post", &admin_type::on_new_post, adm);
+    dispatcher::bind("admin_preview",  &admin_type::on_preview, adm);
 
     dispatcher::set_fatal("__500__");
-
     router::set_source(util::file_loader::load("js/router.js"));
-
     view.set_format("template/%1%.html");
     view.register_modifier("h", tpl::modifier::html_esc());
     view.register_modifier("m", simple_snip());
@@ -68,9 +70,7 @@ bool blog::on_error404()
         make_footer();
         cache.add("error", view.render("main"));
     }
-    response << header("Content-type", "text/html; charset=utf-8");
-    response << cache.get("error");
-    return true;
+    return send(cache.get("error"));
 }
 
 
@@ -87,7 +87,6 @@ bool blog::on_index()
     const string& key = string("index") + request.get_param<string>("page", "1");
     if (!cache.has(key)) {
         if (!cache.has("index")) cache.add("index", "");
-
         int num_posts = mod.count_posts();
         if (!num_posts) {
             return on_error404();
@@ -99,13 +98,10 @@ bool blog::on_index()
         }
         view.assign("prevPageNum", pagi.prev_page_num);
         view.assign("nextPageNum", pagi.next_page_num);
-
         view.assign("posts", mod.get_posts(pagi.offset, items_per_page));
         view.assign("content", view.render("index.content"));
-
         make_sidebar();
         make_footer();
-
         view.assign("title", "blog.runpac.com");
         cache.add("index", key, view.render("main"));
     }
@@ -120,23 +116,18 @@ bool blog::on_post()
     const string& key = string("post") + id;
     if (!cache.has(key)) {
         if (!cache.has("posts")) cache.add("posts", "");
-
         const model::entity& post = mod.get_post(id);
         if (mod.valid(post)) {
             return on_error404();
         }
         view.assign("post", post);
         view.assign("content", view.render("post.content"));
-
         make_sidebar();
         make_footer();
-
         view.assign("title", mod.get_field(post, "title"));
         cache.add("posts", key, view.render("main"));
     }
-    response << header("Content-type", "text/html; charset=utf-8");
-    response << cache.get(key);
-    return true;
+    return send(cache.get(key));
 }
 
 
@@ -144,19 +135,16 @@ bool blog::on_post_post()
 {
     const string& id = request.get_param<string>("id");
     const string& key = string("post") + id;
-
     if (!mod.post_exists(id)) {
         return on_error404();
     }
-
     if (mod.add_new_comment(id, request.get_post_params())) {
         cache.del("index");
         cache.del("footer");
         cache.del(key); // rajouter un delete sur la category et les tags du post!!!
         return on_post();
     }
-    response << "Invalid form";
-    return true;
+    return send("Invalid form");
 }
 
 bool blog::on_category()
@@ -165,7 +153,6 @@ bool blog::on_category()
     const string& parent_key = string("cat") + id;
     const string& key = parent_key + "-" + request.get_param<string>("page", "1"); // cat<id>-<page>
     if (!cache.has(key)) {
-
         int num_posts = mod.count_posts_for_cat(id);
         if (!num_posts) {
             return on_error404();
@@ -177,27 +164,19 @@ bool blog::on_category()
         }
         view.assign("prevPageNum", pagi.prev_page_num);
         view.assign("nextPageNum", pagi.next_page_num);
-
         const string& cat_name = mod.get_cat_name(id);
         view.assign("catName", cat_name);
         view.assign("pageUri", string("/category/") + id);
         view.assign("posts", mod.get_posts_for_cat(id, pagi.offset, items_per_page));
-
         view.assign("content", view.render("category.content"));
-
         make_sidebar();
         make_footer();
-
         view.assign("title", string("Category ") + cat_name);
-
         if (!cache.has("cats")) cache.add("cats", "");
         if (!cache.has(parent_key)) cache.add("cats", parent_key, ""); // checker pertinence du test. voir pour auto add ?
         cache.add(parent_key, key, view.render("main"));
     }
-
-    response << header("Content-type", "text/html; charset=utf-8");
-    response << cache.get(key);
-    return true;
+    return send(cache.get(key));
 }
 
 
@@ -207,7 +186,6 @@ bool blog::on_tag()
     const string& parent_key = string("tag") + id;
     const string& key = parent_key + "-" + request.get_param<string>("page", "1"); // tag<id>-<page>
     if (!cache.has(key)) {
-
         int num_posts = mod.count_posts_for_tag(id);
         if (!num_posts) {
             return on_error404();
@@ -219,27 +197,19 @@ bool blog::on_tag()
         }
         view.assign("prevPageNum", pagi.prev_page_num);
         view.assign("nextPageNum", pagi.next_page_num);
-
         const string& tag_name = mod.get_tag_name(id);
         view.assign("tagName", tag_name);
         view.assign("pageUri", string("/tag/") + id);
         view.assign("posts", mod.get_posts_for_tag(id, pagi.offset, items_per_page));
-
         view.assign("content", view.render("tag.content"));
-
         make_sidebar();
         make_footer();
-
         view.assign("title", string("Tag ") + tag_name);
-
         if (!cache.has("tags")) cache.add("tags", "");
         if (!cache.has(parent_key)) cache.add("tags", parent_key, ""); // checker pertinence du test. voir pour auto add ?
         cache.add(parent_key, key, view.render("main"));
     }
-
-    response << header("Content-type", "text/html; charset=utf-8");
-    response << cache.get(key);
-    return true;
+    return send(cache.get(key));
 }
 
 
@@ -252,9 +222,7 @@ bool blog::on_about()
         view.assign("title", "About");
         cache.add("about", view.render("main"));
     }
-    response << header("Content-type", "text/html; charset=utf-8");
-    response << cache.get("about");
-    return true;
+    return send(cache.get("about"));
 }
 
 
@@ -267,9 +235,7 @@ bool blog::on_help()
         view.assign("title", "Help");
         cache.add("help", view.render("main"));
     }
-    response << header("Content-type", "text/html; charset=utf-8");
-    response << cache.get("help");
-    return true;
+    return send(cache.get("help"));
 }
 
 
@@ -278,17 +244,13 @@ bool blog::on_com_preview()
     view.assign("user", mod.format_comment_user(request.get_post_param("email")));
     view.assign("site", mod.format_comment_site(request.get_post_param("site")));
     view.assign("content", mod.format_comment_content(request.get_post_param("com_con")));
-
-    response << header("Content-type", "text/html; charset=utf-8");
-    response << view.render("preview");
-    return true;
+    return send(view.render("preview"));
 }
 
 
 bool blog::on_blank()
 {
-    response << header("Content-type", "text/html; charset=utf-8");
-    return true;
+    return send("");
 }
 
 
@@ -299,7 +261,6 @@ bool blog::on_reset()
     response << "now clearing...\n";
     view.clear();
     cache.clear();
-
     return on_index();
 }
 
@@ -307,23 +268,17 @@ bool blog::on_check()
 {
     response << cache.check();
     response << cache.check_list();
-
-    //adm.test();
-
-
     sess.start();
     //response << sess.check();
-    response << "logged? " << sess.get<string>("logged", "0") << "\n";
-
+    //response << "logged? " << sess.get<string>("logged", "0") << "\n";
     const params_type& p = request.get_params();
     for (params_type::const_iterator i(p.begin()), e(p.end()); i!= e; ++i) {
         response << i->first << " : " << i->second << "\n";
     }
-    const params_type& c = request.get_cookie_params();
-    for (params_type::const_iterator i(c.begin()), e(c.end()); i!= e; ++i) {
-        response << i->first << " : " << i->second << "\n";
-    }
-
+    //const params_type& c = request.get_cookie_params();
+    //for (params_type::const_iterator i(c.begin()), e(c.end()); i!= e; ++i) {
+    //    response << i->first << " : " << i->second << "\n";
+    //}
     return true;
 }
 
@@ -331,7 +286,6 @@ bool blog::on_check()
 bool blog::on_login() // tmp
 {
     response << header("Content-type", "text/html; charset=utf-8");
-
     sess.start();
     if (sess.get<bool>("logged")) {
         response << view.render("logout");
@@ -349,17 +303,15 @@ bool blog::on_try_login() // tmp
     if (sess.get<bool>("logged")) {
         //sess.del("logged");
         sess.remove();
-        response << "logout OK";
+        return on_index();
     }
-    else {
-        if (mod.can_login(request.get_post_param("user"), request.get_post_param("pass"))) {
-            sess.set("logged", "1");
-            response << "login OK";
-        }
-        else {
-            response << "login FAILED";
-        }
+    else if (mod.can_login(request.get_post_param("user")
+                          ,request.get_post_param("pass")))
+    {
+        sess.set("logged", 1);
+        return on_index();
     }
+    response << "login FAILED";
     return true;
 }
 
@@ -378,12 +330,9 @@ void blog::make_sidebar()
 void blog::make_footer()
 {
     if (!cache.has("footer")) {
-
         view.assign("recentPosts", mod.get_recent_posts());
         view.assign("recentComs", mod.get_recent_comments());
-
         cache.add("footer", view.render("footer"));
-
     }
     view.assign("footer", cache.get("footer"));
 }
@@ -391,8 +340,8 @@ void blog::make_footer()
 
 bool blog::send(const std::string& s)
 {
-    response << header("Content-type", "text/html; charset=utf-8");
-    response << s;
+    response << header("Content-type", "text/html; charset=utf-8")
+             << s;
     return true;
 }
 

@@ -3,31 +3,30 @@
 
 routes = {
   
-  category: {
-    pat: /^category\/([^\/]+)(?:\/page\/(\d{1,4}))?$/,
-    map: {1: "id", 2: "page"}
+  index: {
+    pat: /^(?:index)?(?:page\/(\d{1,4}))?$/,
+    map: { 1: "page" }
   },
-  
-  tag: {
-    pat: /^tag\/([^\/]+)(?:\/page\/(\d{1,4}))?$/,
-    map: {1: "id", 2: "page"}
-  },
-
   post: {
     pat: /^post\/([^\/]+)$/,
     map: {1: "id"},
     POST: "post_post"
   },
-
+  category: {
+    pat: /^category\/([^\/]+)(?:\/page\/(\d{1,4}))?$/,
+    map: {1: "id", 2: "page"}
+  },
+  tag: {
+    pat: /^tag\/([^\/]+)(?:\/page\/(\d{1,4}))?$/,
+    map: {1: "id", 2: "page"}
+  },
   preview: {
     pat: /^preview$/,
     GET: "blank"
   },
-
   about: {
     pat: /^about$/
   },
-
   help: {
     pat: /^help$/
   },
@@ -35,12 +34,19 @@ routes = {
   admin_index: {
     pat: /^adm$/
   },
-
   admin_edit: {
     pat: /^adm\/edit\/([^\/]+)$/,
-    map: {1: "id"}
+    map: {1: "id"},
+    POST: "admin_edit_post"
   },
-
+  admin_new: {
+    pat: /^adm\/new$/,
+    POST: "admin_new_post"
+  },
+  admin_preview: {
+    pat: /^adm\/preview$/,
+    GET: "blank"
+  },
 
   login: {
     pat: /^login$/,
@@ -54,11 +60,6 @@ routes = {
   check: { // tmp check cache
     pat: /^check$/
   },
-
-  index: {
-    pat: /^(?:index)?(?:page\/(\d{1,4}))?$/,
-    map: { 1: "page" }
-  }
 
 }
 

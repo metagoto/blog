@@ -21,7 +21,7 @@
 <li>
 <strong>{% if (post.coms[k].site) : %}
 <a href="{%= post.coms[k].site %}" rel="nofollow">{%= post.coms[k].user %}</a>{% else : %}{%= post.coms[k].user %}{% end %}</strong>, 
-{%= post.coms[k].date.toDateString().toLowerCase() %}
+{%= post.coms[k].date.toDateString() %}
 <div>{%:h:m= post.coms[k].content %}</div>
 </li>
 {% end %}

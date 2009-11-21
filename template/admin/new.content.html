@@ -1,0 +1,60 @@
+<div class="post" id="post">
+</div>
+
+
+<h3 class="info">New</h3>
+
+<form method="post" action="/adm/new">
+
+<p><input type="text" id="id" name="id" value="" />
+<label for="id">_id*</label></p>
+    
+<p><input type="text" id="title" name="title" value="" />
+<label for="title">Title*</label></p>
+
+<p><input type="text" id="subtitle" name="subtitle" value="" />
+<label for="subtitle">Subtitle</label></p>
+
+<p><input type="text" id="cats" name="cats" value="" />
+<label for="cats">Categories</label></p>
+
+<p><input type="text" id="tags" name="tags" value="" />
+<label for="tags">Tags</label></p>
+
+<p><textarea id="cont" name="cont" cols="50" rows="20" style="height: 400px"></textarea></p>
+
+<p><input type="submit" id="submit" name="submit" value="Send" />
+<input type="button" id="previewb" value="Preview"/></p>
+
+</form>
+
+<script type="text/javascript">
+function aInit() {
+  $("#previewb").click(function(){
+    previewPost();
+  });
+};
+function previewPost() {
+  if (!jQuery.trim($("#cont").val()).length) 
+    return;
+  $.ajax({
+    type: "POST",
+    url: "/adm/preview",
+    dataType: "text",
+    data: [
+     { name: 'id', value: $("#id").val() },
+     { name: 'title', value: $("#title").val() },
+     { name: 'subtitle', value: $("#subtitle").val() },
+     { name: 'cats', value: $("#cats").val() },
+     { name: 'tags', value: $("#tags").val() },
+     { name: 'cont', value: $("#cont").val() }
+   ],
+    success: function(data){
+      $("#post").html(data);
+      Quode.JSH.highlight(document.getElementById('post').getElementsByTagName('code'));
+    },
+    complete: function() {
+    }
+  });
+}
+</script>

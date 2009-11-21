@@ -1,14 +1,7 @@
+<p><a href="/adm/new">NEW</a></p>
 <ul>
 {% for (i in posts) : %}
 <li><a href="/adm/edit/{%= posts[i]._id %}">{%= posts[i].title %}</a></li>
 {% end %}
 </ul>
 
-<div id="pagi">
-{% if (prevPageNum) : %}
-<span class="prev"><a href="/page/{%= prevPageNum %}">&#171; newer</a></span>
-{% end %}
-{% if (nextPageNum) : %}
-<span class="next"><a href="/page/{%= nextPageNum %}">older &#187;</a></span>
-{% end %}
-</div>

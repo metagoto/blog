@@ -60,14 +60,17 @@ private:
     bool on_reset();
     bool on_check();
 
-    runpac::model mod;
+    typedef runpac::model model_type;
+    model_type mod;
 
     //tmp
     static const int items_per_page = 4;
 
-    fcgixx::cache::hierarchic<> cache;
+    typedef fcgixx::cache::hierarchic<> cache_type;
+    cache_type cache;
 
-    fcgixx::tpl::v8_tpl view;
+    typedef fcgixx::tpl::v8_tpl view_type;
+    view_type view;
 
     fcgixx::session::mem_cook<request_type, response_type>::type sess;
 

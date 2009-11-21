@@ -8,7 +8,9 @@ function () {
     var tmp = [];
     db.post.find( {}, { _tags: 1 }).forEach(function (x) {
         for (var i = 0, t; t = x._tags[i]; ++i) {
-            tmp[t] = { _id: t, name: tags[t], count: 1 + (tmp[t] ? tmp[t].count : 0) };
+            if (tags[t]) {
+                tmp[t] = { _id: t, name: tags[t], count: 1 + (tmp[t] ? tmp[t].count : 0) };
+            }
         }
     });
 

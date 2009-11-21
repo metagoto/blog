@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <boost/algorithm/string.hpp>
 #include <boost/tr1/regex.hpp>
 #include <mongo/client/dbclient.h>
@@ -46,6 +47,7 @@ struct model
         register_mongo_func("getCatCloud");
         register_mongo_func("getRecentPosts");
         register_mongo_func("getRecentComments");
+        register_mongo_func("getPostRaw");
     }
 
 
@@ -102,6 +104,15 @@ struct model
         mongo::BSONElement ret;
         mongo::BSONObj args = BSON("0" << id);
         db.eval(ns_db, "function (id) { return getPost(id); }", info, ret, &args);
+        return ret;
+    }
+
+    entity get_post_raw(const std::string& id)
+    {
+        static mongo::BSONObj info;
+        mongo::BSONElement ret;
+        mongo::BSONObj args = BSON("0" << id);
+        db.eval(ns_db, "function (id) { return getPostRaw(id); }", info, ret, &args);
         return ret;
     }
 
@@ -248,6 +259,70 @@ struct model
 
         return true;
     }
+
+    // tmp. need to move to conv ns
+    std::vector<std::string> to_array(const std::string& tokens)
+    {
+        typedef std::vector<std::string> vec_t;
+        vec_t v;
+        boost::algorithm::split(v, tokens, boost::algorithm::is_any_of(", ")
+                               ,boost::algorithm::token_compress_on);
+        return v;
+    }
+
+    // tmp
+    template<typename T>
+    bool update_post(const std::string& id, const T& params)
+    {
+        using std::string;
+
+        const string& title = params.at("title");
+        const string& subtitle = params.at("subtitle");
+        const string& cats = params.at("cats");
+        const string& tags = params.at("tags");
+        const string& content = params.at("cont");
+
+        mongo::BSONObjBuilder o;
+        o << "title" << title
+          << "subtitle" << subtitle
+          << "content" << content;
+        o.append("_cats", to_array(cats));
+        o.append("_tags", to_array(tags));
+
+        db.update(ns_post, BSON("_id" << id),
+            BSON( "$set" << o.done() )
+        );
+        return true;
+    }
+
+    // tmp
+    template<typename T>
+    bool new_post(const T& params)
+    {
+        using std::string;
+
+        const string& id = params.at("id");
+        const string& title = params.at("title");
+        const string& subtitle = params.at("subtitle");
+        const string& cats = params.at("cats");
+        const string& tags = params.at("tags");
+        const string& content = params.at("cont");
+
+        mongo::BSONObjBuilder o;
+        o << "_id" << id
+          << "title" << title
+          << "subtitle" << subtitle
+          << "content" << content
+          << "date" << mongo::DATENOW;
+        o.append("_cats", to_array(cats));
+        o.append("_tags", to_array(tags));
+        mongo::BSONArray a;
+        o.appendArray("coms", a);
+
+        db.insert(ns_post, o.done() );
+        return true;
+    }
+
 
     bool can_login(const std::string& user, const std::string& pass)
     {

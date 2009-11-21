@@ -1,0 +1,68 @@
+<div class="post" id="post">
+    <h2><a href="/post/{%= post._id %}">{%= post.title %}</a></h2>
+	<h3>{%= post.subtitle %}</h3>
+	<div class="meta">{%= post.date.toDateString() %}, filled under
+	 	{%:r= post.cats.map(function (t) {
+			return '<a href="/category/'+t._id+'">'+t.name+'</a>';
+		}).join(", ") %}.
+	{%= post.numComs %} comment{%= post.numComs > 1 ? "s" : ""%}
+	</div>
+	<div class="entry">{%:r= post.content %}</div>
+	<div class="foot">tags {%:r= post.tags.map(function (t) {
+		return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
+	}).join(", ") %}</div>
+</div>
+
+
+<h3 class="info">Edit</h3>
+
+<form method="post" action="/adm/edit/{%= post._id %}">
+
+<p><input type="text" id="title" name="title" value="{%= post.title %}" />
+<label for="title">Title*</label></p>
+
+<p><input type="text" id="subtitle" name="subtitle" value="{%= post.subtitle %}" />
+<label for="subtitle">Subtitle</label></p>
+
+<p><input type="text" id="cats" name="cats" value="{%= post._cats.toString() %}" />
+<label for="cats">Categories</label></p>
+
+<p><input type="text" id="tags" name="tags" value="{%= post._tags.toString() %}" />
+<label for="tags">Tags</label></p>
+
+<p><textarea id="cont" name="cont" cols="50" rows="20" style="height: 400px">{%= post.content %}</textarea></p>
+
+<p><input type="submit" id="submit" name="submit" value="Send" />
+<input type="button" id="previewb" value="Preview"/></p>
+
+</form>
+
+<script type="text/javascript">
+function aInit() {
+  $("#previewb").click(function(){
+    previewPost();
+  });
+};
+function previewPost() {
+  if (!jQuery.trim($("#cont").val()).length) 
+    return;
+  $.ajax({
+    type: "POST",
+    url: "/adm/preview",
+    dataType: "text",
+    data: [
+     { name: 'title', value: $("#title").val() },
+     { name: 'subtitle', value: $("#subtitle").val() },
+     { name: 'cats', value: $("#cats").val() },
+     { name: 'tags', value: $("#tags").val() },
+     { name: 'cont', value: $("#cont").val() }
+   ],
+    success: function(data){
+      $("#post").html(data);
+      Quode.JSH.highlight(document.getElementById('post').getElementsByTagName('code'));
+    },
+    complete: function() {
+    }
+  });
+}
+</script>
