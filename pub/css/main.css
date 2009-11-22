@@ -107,8 +107,9 @@ h3 {
   margin: 1.3em 0;
 }
 
-.entry {
-	
+.entry ul {
+	list-style-type:disc;
+  list-style-position:inside;
 }
 
 .entry h3 {

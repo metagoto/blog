@@ -5,7 +5,7 @@
 <li class="post">
 	<h2><a href="/post/{%= posts[i]._id %}">{%= posts[i].title %}</a></h2>
 	<h3>{%= posts[i].subtitle %}</h3>
-	<div class="meta">{%= posts[i].date.toDateString() %}, filled under
+	<div class="meta">{%= posts[i].date.toDateString() %}, filed under
 	 	{%:r= posts[i].cats.map(function (t) {
 			return '<a href="/category/'+t._id+'">'+t.name+'</a>';
 		}).join(", ") %}.

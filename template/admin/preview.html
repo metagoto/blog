@@ -1,6 +1,6 @@
 <h2><a href="/post/{%= post._id %}">{%= post.title %}</a></h2>
 <h3>{%= post.subtitle %}</h3>
-<div class="meta">{%= post.date.toDateString() %}, filled under
+<div class="meta">{%= post.date.toDateString() %}, filed under
  	{%:r= post.cats.map(function (t) {
 		return '<a href="/category/'+t._id+'">'+t.name+'</a>';
 	}).join(", ") %}.
