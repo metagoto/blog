@@ -6,7 +6,7 @@ html,body {
   margin: 0;
   padding: 0;
   font-size: 100%;
-  font-family: Verdana,"Lucida Grande",Geneva,Arial,sans-serif;
+  font-family: Verdana,Geneva,Arial,sans-serif;
   font-size-adjust:none;
   font-stretch:normal;
   font-style :normal;
@@ -71,7 +71,7 @@ h2 {
 }
 
 h3 {
-	font-family: "Lucida Console",Monaco;
+	font-family: Arial;
 }
 
 .post {
@@ -95,6 +95,7 @@ h3 {
   font-size: 1.1em;
 	margin: 0 0 .3em 0;
 	color: #800000;
+	font-family: "verdana";
 }
 
 .post .meta, .post .foot {
