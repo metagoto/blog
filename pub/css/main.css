@@ -75,6 +75,11 @@ h3 {
 	font-family: Arial;
 }
 
+h4 {
+	padding-bottom: 0em;
+	margin-bottom: 0em;
+}
+
 .post {
 	position: relative;
 	margin: 0 0 3em 0;
