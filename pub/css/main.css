@@ -120,17 +120,22 @@ h4 {
 }
 
 .entry h3 {
-	color: 000;
+	color: #666;
 	font-style: normal;
+	font-weight: bold;
+	font-family: "Trebuchet MS", verdana;
+	font-size: 1.3em;
 }
 
 
 
 .entry blockquote {
-	border-left: 2px dotted #ddd;
-	background: transparent url(blockquote.gif) no-repeat;
-	padding: 6px 0 0 32px;
+	border-top: 2px dotted #ddd;
+	border-bottom: 2px dotted #ddd;
+	background: transparent url(blockquote.gif) no-repeat 0 4px;
+	padding: 6px 0 4px 34px;
 	margin-right: 0;
+	color: #555;
 }
 
 
@@ -152,6 +157,7 @@ ul.tag a.med {
 ul.tag a.big {
 	font-size: 120%;
 }
+
 
 #footer {
 	clear: both;
@@ -207,9 +213,8 @@ ul.tag a.big {
 }
 
 #header {
-	text-align: center;
 	background: #000 url(stripe1.png);
-	padding: 1.8em 0 1.6em 0;
+	padding: 1.8em 0 1.2em 0;
 	margin: 0 0 1em 0;
 }
 #header h1 {
@@ -219,6 +224,7 @@ ul.tag a.big {
 	font-weight: normal;
 	margin: 0;
 	padding: 0;
+	text-align: center;
 }
 #header h1 span {
 	font-size: 0.3em;
@@ -230,7 +236,7 @@ ul.tag a.big {
 	text-decoration: none;
 	color: #eee;
 	font-weight: bold;
-	text-shadow: 2px 2px 4px #800000;
+	text-shadow: 3px 2px 4px #800000;
 }
 
 #header p {
@@ -239,6 +245,7 @@ ul.tag a.big {
 	font-style: italic;
 	padding:0;
 	margin:0;
+	text-align: center;
 }
 
 #main {
