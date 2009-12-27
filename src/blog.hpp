@@ -49,6 +49,8 @@ struct blog
 
     bool on_blank();
 
+    bool on_feed();
+
 
 private:
     void make_sidebar();

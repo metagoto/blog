@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+{% 
+var dateMe = function(d) {
+  d = d || new Date();
+  var pad = function (n) { return ((n < 10) ? '0' : '') + n; }
+  return d.getUTCFullYear() + '-' +
+    pad(d.getUTCMonth()) + '-' +
+    pad(d.getUTCDate()) + 'T' +
+    pad(d.getUTCHours()) + ':' +
+    pad(d.getUTCMinutes()) + ':' +
+    pad(d.getUTCSeconds()) + 'Z';
+};
+%}
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>blog.runpac.com</title>
+<subtitle>metagoto's blog</subtitle>
+<link href="http://blog.runpac.com/feed" rel="self" />
+<link href="http://blog.runpac.com" />
+<id>tag:blog.runpac.com,posts:/posts</id>	
+<updated>{%= dateMe() %}</updated>
+<author><name>metagoto</name></author>
+{% for (i in posts) : %}
+<entry>
+<title>{%= posts[i].title %}</title>
+<link href="http://blog.runpac.com/post/{%= posts[i]._id %}" />
+<id>tag:blog.runpac.com,{%=posts[i].date.getTime()+':/'+posts[i].date.getTime()%}</id>
+<updated>{%= dateMe(posts[i].date) %}</updated>
+<content type="html"><![CDATA[{%:r= posts[i].content %}]]></content>
+</entry>
+{% end %}
+</feed>

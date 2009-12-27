@@ -12,6 +12,9 @@
 #include <fcgixx/conv/mongo_v8.hpp>
 
 
+#include <boost/functional/hash.hpp>
+
+
 namespace runpac {
 
 using namespace std;
@@ -39,6 +42,8 @@ blog::blog()
     dispatcher::bind("blank",    &blog::on_blank);
     dispatcher::bind("login",    &blog::on_login);
     dispatcher::bind("try_login",&blog::on_try_login);
+
+    dispatcher::bind("feed",     &blog::on_feed);
 
     dispatcher::bind("admin_index",    &admin_type::on_index, adm);
     dispatcher::bind("admin_edit",     &admin_type::on_edit, adm);
@@ -210,6 +215,16 @@ bool blog::on_tag()
         cache.add(parent_key, key, view.render("main"));
     }
     return send(cache.get(key));
+}
+
+
+bool blog::on_feed()
+{
+    if (!cache.has("feed")) {
+        view.assign("posts", mod.get_posts_for_feed());
+        cache.add("feed", view.render("feed.post"));
+    }
+    return send(cache.get("feed"));
 }
 
 

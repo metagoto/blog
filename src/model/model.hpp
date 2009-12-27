@@ -48,6 +48,8 @@ struct model
         register_mongo_func("getRecentPosts");
         register_mongo_func("getRecentComments");
         register_mongo_func("getPostRaw");
+        register_mongo_func("getPostsForFeed");
+
     }
 
 
@@ -149,6 +151,15 @@ struct model
         mongo::BSONElement ret;
         mongo::BSONObj args;
         db.eval(ns_db, "function () { return getCatCloud(); }", info, ret, &args);
+        return ret;
+    }
+
+    entity get_posts_for_feed(int limit = 10)
+    {
+        static mongo::BSONObj info;
+        mongo::BSONElement ret;
+        mongo::BSONObj args = BSON("0" << limit);
+        db.eval(ns_db, "function (limit) { return getPostsForFeed(limit); }", info, ret, &args); //bool ok
         return ret;
     }
 

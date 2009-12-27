@@ -24,6 +24,11 @@ routes = {
     pat: /^preview$/,
     GET: "blank"
   },
+
+  feed: {
+    pat: /^feed$/
+  },
+
   about: {
     pat: /^about$/
   },
