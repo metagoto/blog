@@ -10,20 +10,23 @@ var dateMe = function(d) {
     pad(d.getUTCMinutes()) + ':' +
     pad(d.getUTCSeconds()) + 'Z';
 };
+var tagMe = function(d) {
+  return d.getUTCFullYear() + '-' + d.getUTCMonth() + '-' + d.getUTCDate();
+};
 %}
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>blog.runpac.com</title>
 <subtitle>metagoto's blog</subtitle>
 <link href="http://blog.runpac.com/feed" rel="self" />
 <link href="http://blog.runpac.com" />
-<id>tag:blog.runpac.com,posts:/posts</id>	
+<id>tag:blog.runpac.com,2009-10-08:/feed</id>	
 <updated>{%= dateMe() %}</updated>
 <author><name>metagoto</name></author>
 {% for (i in posts) : %}
 <entry>
 <title>{%= posts[i].title %}</title>
 <link href="http://blog.runpac.com/post/{%= posts[i]._id %}" />
-<id>tag:blog.runpac.com,{%=posts[i].date.getTime()+':/'+posts[i].date.getTime()%}</id>
+<id>tag:blog.runpac.com,{%= posts[i].date.getUTCFullYear()+':/'+posts[i].date.getTime()%}</id>
 <updated>{%= dateMe(posts[i].date) %}</updated>
 <content type="html"><![CDATA[{%:r= posts[i].content %}]]></content>
 </entry>

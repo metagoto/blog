@@ -224,7 +224,9 @@ bool blog::on_feed()
         view.assign("posts", mod.get_posts_for_feed());
         cache.add("feed", view.render("feed.post"));
     }
-    return send(cache.get("feed"));
+    response << header("Content-type", "application/atom+xml; charset=utf-8")
+             << cache.get("feed");
+    return true;
 }
 
 
