@@ -107,7 +107,7 @@ bool blog::on_index()
         view.assign("content", view.render("index.content"));
         make_sidebar();
         make_footer();
-        view.assign("title", "blog.runpac.com");
+        view.assign("title", "Index");
         cache.add("index", key, view.render("main"));
     }
     return send(cache.get(key));
