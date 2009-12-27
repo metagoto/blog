@@ -291,6 +291,7 @@ ul.tag a.big {
 	width: 174px;
 	margin: 0 0 1em 16px;
 	font-size: 0.8em;
+	position: relative;
 }
 
 #sidebar ul {
@@ -347,3 +348,25 @@ input[type=submit], input[type=button] {
 	width: 80px;
 	margin: 0 1em 0 0;
 }
+
+#search {
+  padding: 0;
+  margin: 0 0 2em 0;
+  display: block;
+  position: absolute;
+  top: -46px;
+  left: -1px;
+}
+
+#search .stext {
+    width: 160px;
+    border: 1px solid #555;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    background: transparent;
+    color: #fff;
+    height: 1.5em;
+    padding: 2px;
+    margin: 0;
+}
+
