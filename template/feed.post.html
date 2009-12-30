@@ -4,14 +4,11 @@ var dateMe = function(d) {
   d = d || new Date();
   var pad = function (n) { return ((n < 10) ? '0' : '') + n; }
   return d.getUTCFullYear() + '-' +
-    pad(d.getUTCMonth()) + '-' +
+    pad(d.getUTCMonth()+1) + '-' +
     pad(d.getUTCDate()) + 'T' +
     pad(d.getUTCHours()) + ':' +
     pad(d.getUTCMinutes()) + ':' +
     pad(d.getUTCSeconds()) + 'Z';
-};
-var tagMe = function(d) {
-  return d.getUTCFullYear() + '-' + d.getUTCMonth() + '-' + d.getUTCDate();
 };
 %}
 <feed xmlns="http://www.w3.org/2005/Atom">
