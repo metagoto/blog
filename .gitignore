@@ -13,6 +13,8 @@ rc.blog
 
 pub/img/*
 
+tool/tweetsg
+
 blog.config
 blog.creator
 blog.files

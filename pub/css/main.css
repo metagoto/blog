@@ -136,6 +136,8 @@ h4 {
 	padding: 6px 0 4px 34px;
 	margin-right: 0;
 	color: #555;
+	font-family: georgia;
+	font-size: 1.2em;
 }
 
 
@@ -158,6 +160,13 @@ ul.tag a.big {
 	font-size: 120%;
 }
 
+ul.tweets li {
+	font-size: 0.8em;
+	margin-bottom: .5em;
+}
+ul.tweets a {
+	
+}
 
 #footer {
 	clear: both;

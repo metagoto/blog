@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:georss="http://www.georss.org/georss">
+  <channel>
+    <title>Twitter / metagoto</title>
+    <link>http://twitter.com/metagoto</link>
+    <atom:link type="application/rss+xml" href="http://api.twitter.com/1/statuses/user_timeline/metagoto.rss?count=5" rel="self"/>
+    <description>Twitter updates from metagoto / metagoto.</description>
+    <language>en-us</language>
+    <ttl>40</ttl>
+  <item>
+    <title>metagoto: en attendant j'ai une ext SplClassLoader en C qui impl&#233;mente PSR-0. environ 30% de perf en plus par rapport &#224; http://gist.github.com/221634</title>
+    <description>metagoto: en attendant j'ai une ext SplClassLoader en C qui impl&#233;mente PSR-0. environ 30% de perf en plus par rapport &#224; http://gist.github.com/221634</description>
+    <pubDate>Mon, 04 Jan 2010 17:59:34 +0000</pubDate>
+    <guid>http://twitter.com/metagoto/statuses/7373985975</guid>
+    <link>http://twitter.com/metagoto/statuses/7373985975</link>
+  </item>
+  <item>
+    <title>metagoto: Ma request de membership est pending depuis 2 semaines. http://groups.google.com/group/php-standards</title>
+    <description>metagoto: Ma request de membership est pending depuis 2 semaines. http://groups.google.com/group/php-standards</description>
+    <pubDate>Mon, 04 Jan 2010 17:54:54 +0000</pubDate>
+    <guid>http://twitter.com/metagoto/statuses/7373860877</guid>
+    <link>http://twitter.com/metagoto/statuses/7373860877</link>
+  </item>
+  <item>
+    <title>metagoto: RT @mongodb: MongoDB 1.2.1 is out - stable branch, just bug fixes http://groups.google.com/group/mongodb-user/browse_thread/thread/7a883 ...</title>
+    <description>metagoto: RT @mongodb: MongoDB 1.2.1 is out - stable branch, just bug fixes http://groups.google.com/group/mongodb-user/browse_thread/thread/7a883 ...</description>
+    <pubDate>Wed, 30 Dec 2009 21:01:22 +0000</pubDate>
+    <guid>http://twitter.com/metagoto/statuses/7208622508</guid>
+    <link>http://twitter.com/metagoto/statuses/7208622508</link>
+  </item>
+  <item>
+    <title>metagoto: compte twitter cr&#233;&#233;. ajout du lien sur http://blog.runpac.com . y eu du boulot de fait</title>
+    <description>metagoto: compte twitter cr&#233;&#233;. ajout du lien sur http://blog.runpac.com . y eu du boulot de fait</description>
+    <pubDate>Mon, 28 Dec 2009 21:06:12 +0000</pubDate>
+    <guid>http://twitter.com/metagoto/statuses/7134770674</guid>
+    <link>http://twitter.com/metagoto/statuses/7134770674</link>
+  </item>
+  <item>
+    <title>metagoto: nothing</title>
+    <description>metagoto: nothing</description>
+    <pubDate>Mon, 28 Dec 2009 19:48:04 +0000</pubDate>
+    <guid>http://twitter.com/metagoto/statuses/7132627512</guid>
+    <link>http://twitter.com/metagoto/statuses/7132627512</link>
+  </item>
+  </channel>
+</rss>

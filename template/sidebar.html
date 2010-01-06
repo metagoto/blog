@@ -21,6 +21,8 @@
 <li><a href="/category/{%= cats[i]._id %}">{%= cats[i].name %}</a> ({%= cats[i].count %})</li>
 {% end %}</ul>
 
+{%:r= tweets %}
+
 <h3>Tags</h3>
 <ul class="tag">{% for (i in tags) : %}
 <li><a href="/tag/{%= tags[i]._id %}" style="font-size:{%= 60+tags[i].count*20 %}%;" title="{%= tags[i].count %} entries">{%= tags[i].name %}</a></li>
@@ -32,12 +34,4 @@
 <li><a href="http://alpmestan.wordpress.com">Alp Mestan's blog</a></li>
 <li><a href="http://blog.pascal-martin.fr">Pascal Martin's blog</a></li>
 <li><a href="http://ljouanneau.com/blog">Laurent Jouanneau's blog</a></li>
-</ul>
-
-<h3>Zero Followers</h3>
-<ul>
-<li><a href="http://twitter.com/metagoto">twitter</a></li>
-<li class="strike">identi.ca</li>
-<li class="strike">facebook</li>
-<li class="strike">delicious</li>
 </ul>

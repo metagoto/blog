@@ -51,10 +51,13 @@ struct blog
 
     bool on_feed();
 
+    bool on_tweetsg();
+
 
 private:
     void make_sidebar();
     void make_footer();
+    void make_tweets();
 
     bool send(const std::string&);
 

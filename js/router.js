@@ -20,13 +20,14 @@ routes = {
     pat: /^tag\/([^\/]+)(?:\/page\/(\d{1,4}))?$/,
     map: {1: "id", 2: "page"}
   },
-  preview: {
-    pat: /^preview$/,
-    GET: "blank"
-  },
 
   feed: {
     pat: /^feed$/
+  },
+
+  preview: {
+    pat: /^preview$/,
+    GET: "blank"
   },
 
   about: {
@@ -56,6 +57,10 @@ routes = {
   login: {
     pat: /^login$/,
     POST: "try_login"
+  },
+
+  tweetsg: {
+    pat:/^tweetsg$/
   },
 
   reset: { // tmp reset

@@ -42,8 +42,8 @@ blog::blog()
     dispatcher::bind("blank",    &blog::on_blank);
     dispatcher::bind("login",    &blog::on_login);
     dispatcher::bind("try_login",&blog::on_try_login);
-
     dispatcher::bind("feed",     &blog::on_feed);
+    dispatcher::bind("tweetsg",  &blog::on_tweetsg);
 
     dispatcher::bind("admin_index",    &admin_type::on_index, adm);
     dispatcher::bind("admin_edit",     &admin_type::on_edit, adm);
@@ -333,11 +333,31 @@ bool blog::on_try_login() // tmp
 }
 
 
+bool blog::on_tweetsg()
+{
+    view.clear();
+    cache.clear();
+    return on_blank();
+}
+
+
+void blog::make_tweets()
+{
+    if (!cache.has("tweets")) {
+        cache.add("tweets", view.render("sidebar.tweets"));
+    }
+    view.assign("tweets", cache.get("tweets"));
+}
+
+
 void blog::make_sidebar()
 {
     if (!cache.has("sidebar")) {
         view.assign("cats", mod.get_cats());
         view.assign("tags", mod.get_tags());
+
+        make_tweets();
+
         cache.add("sidebar", view.render("sidebar"));
     }
     view.assign("sidebar", cache.get("sidebar"));
