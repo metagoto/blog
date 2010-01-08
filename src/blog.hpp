@@ -69,7 +69,7 @@ private:
     model_type mod;
 
     //tmp
-    static const int items_per_page = 4;
+    static const int items_per_page = 3;
 
     typedef fcgixx::cache::hierarchic<> cache_type;
     cache_type cache;
