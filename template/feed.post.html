@@ -23,7 +23,7 @@ var dateMe = function(d) {
 <entry>
 <title>{%= posts[i].title %}</title>
 <link href="http://blog.runpac.com/post/{%= posts[i]._id %}" rel="alternate" type="text/html" />
-<id>tag:blog.runpac.com,{%= posts[i].date.getUTCFullYear()+':/'+posts[i].date.getTime()/p%}</id>
+<id>tag:blog.runpac.com,{%= posts[i].date.getUTCFullYear()+':/'+posts[i].date.getTime()%}/p</id>
 <updated>{%= dateMe(posts[i].date) %}</updated>
 <content type="html"><![CDATA[{%:r= posts[i].content %}]]></content>
 </entry>
