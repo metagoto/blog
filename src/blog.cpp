@@ -12,8 +12,6 @@
 #include <fcgixx/conv/mongo_v8.hpp>
 
 
-#include <boost/functional/hash.hpp>
-
 
 namespace runpac {
 
@@ -23,7 +21,7 @@ using namespace runpac::fcgixx::http;
 
 
 blog::blog()
-    : sess(request, response) //////
+    : sess(request, response)
     , adm(this)
 {
 
@@ -114,7 +112,6 @@ bool blog::on_index()
 }
 
 
-
 bool blog::on_post()
 {
     const string& id = request.get_param<string>("id");
@@ -151,6 +148,7 @@ bool blog::on_post_post()
     }
     return send("Invalid form");
 }
+
 
 bool blog::on_category()
 {
@@ -281,6 +279,7 @@ bool blog::on_reset()
     return on_index();
 }
 
+
 bool blog::on_check()
 {
     response << cache.check();
@@ -318,7 +317,6 @@ bool blog::on_try_login() // tmp
 {
     sess.start();
     if (sess.get<bool>("logged")) {
-        //sess.del("logged");
         sess.remove();
         return on_index();
     }
@@ -341,23 +339,12 @@ bool blog::on_tweetsg()
 }
 
 
-void blog::make_tweets()
-{
-    if (!cache.has("tweets")) {
-        cache.add("tweets", view.render("sidebar.tweets"));
-    }
-    view.assign("tweets", cache.get("tweets"));
-}
-
-
 void blog::make_sidebar()
 {
     if (!cache.has("sidebar")) {
         view.assign("cats", mod.get_cats());
         view.assign("tags", mod.get_tags());
-
         make_tweets();
-
         cache.add("sidebar", view.render("sidebar"));
     }
     view.assign("sidebar", cache.get("sidebar"));
@@ -372,6 +359,15 @@ void blog::make_footer()
         cache.add("footer", view.render("footer"));
     }
     view.assign("footer", cache.get("footer"));
+}
+
+
+void blog::make_tweets()
+{
+    if (!cache.has("tweets")) {
+        cache.add("tweets", view.render("sidebar.tweets"));
+    }
+    view.assign("tweets", cache.get("tweets"));
 }
 
 
