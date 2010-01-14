@@ -219,7 +219,7 @@ bool blog::on_tag()
 bool blog::on_feed()
 {
     if (!cache.has("feed")) {
-        view.assign("posts", mod.get_posts_for_feed(5));
+        view.assign("posts", mod.get_posts_for_feed(4));
         cache.add("feed", view.render("feed.post"));
     }
     response << header("Content-type", "application/atom+xml; charset=utf-8")
