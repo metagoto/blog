@@ -55,7 +55,9 @@ struct blog
 
 
 private:
+    void make_stuff();
     void make_sidebar();
+    void make_header();
     void make_footer();
     void make_tweets();
 

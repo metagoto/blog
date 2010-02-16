@@ -69,8 +69,7 @@ bool blog::on_error404()
     if (!cache.has("error")) {
         view.assign("content", view.render("error.content"));
         view.assign("title", "404 - Page not found");
-        make_sidebar();
-        make_footer();
+        make_stuff();
         cache.add("error", view.render("main"));
     }
     return send(cache.get("error"));
@@ -103,8 +102,7 @@ bool blog::on_index()
         view.assign("nextPageNum", pagi.next_page_num);
         view.assign("posts", mod.get_posts(pagi.offset, items_per_page));
         view.assign("content", view.render("index.content"));
-        make_sidebar();
-        make_footer();
+        make_stuff();
         view.assign("title", "Index");
         cache.add("index", key, view.render("main"));
     }
@@ -124,8 +122,7 @@ bool blog::on_post()
         }
         view.assign("post", post);
         view.assign("content", view.render("post.content"));
-        make_sidebar();
-        make_footer();
+        make_stuff();
         view.assign("title", mod.get_field(post, "title"));
         cache.add("posts", key, view.render("main"));
     }
@@ -172,8 +169,7 @@ bool blog::on_category()
         view.assign("pageUri", string("/category/") + id);
         view.assign("posts", mod.get_posts_for_cat(id, pagi.offset, items_per_page));
         view.assign("content", view.render("category.content"));
-        make_sidebar();
-        make_footer();
+        make_stuff();
         view.assign("title", string("Category ") + cat_name);
         if (!cache.has("cats")) cache.add("cats", "");
         if (!cache.has(parent_key)) cache.add("cats", parent_key, ""); // checker pertinence du test. voir pour auto add ?
@@ -205,8 +201,7 @@ bool blog::on_tag()
         view.assign("pageUri", string("/tag/") + id);
         view.assign("posts", mod.get_posts_for_tag(id, pagi.offset, items_per_page));
         view.assign("content", view.render("tag.content"));
-        make_sidebar();
-        make_footer();
+        make_stuff();
         view.assign("title", string("Tag ") + tag_name);
         if (!cache.has("tags")) cache.add("tags", "");
         if (!cache.has(parent_key)) cache.add("tags", parent_key, ""); // checker pertinence du test. voir pour auto add ?
@@ -232,8 +227,7 @@ bool blog::on_about()
 {
     if (!cache.has("about")) {
         view.assign("content", view.render("about.content"));
-        make_sidebar();
-        make_footer();
+        make_stuff();
         view.assign("title", "About");
         cache.add("about", view.render("main"));
     }
@@ -245,8 +239,7 @@ bool blog::on_help()
 {
     if (!cache.has("help")) {
         view.assign("content", view.render("help.content"));
-        make_sidebar();
-        make_footer();
+        make_stuff();
         view.assign("title", "Help");
         cache.add("help", view.render("main"));
     }
@@ -339,15 +332,32 @@ bool blog::on_tweetsg()
 }
 
 
+void blog::make_stuff()
+{
+    make_header();
+    make_sidebar();
+    make_footer();
+}
+
+
 void blog::make_sidebar()
 {
     if (!cache.has("sidebar")) {
-        view.assign("cats", mod.get_cats());
         view.assign("tags", mod.get_tags());
         make_tweets();
         cache.add("sidebar", view.render("sidebar"));
     }
     view.assign("sidebar", cache.get("sidebar"));
+}
+
+
+void blog::make_header()
+{
+    if (!cache.has("header")) {
+        view.assign("cats", mod.get_cats());
+        cache.add("header", view.render("header"));
+    }
+    view.assign("header", cache.get("header"));
 }
 
 

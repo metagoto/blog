@@ -1,7 +1,8 @@
 <div class="post" id="post">
+    <div class="date">{%:r= post.date.toDateString().replace(/ (\d\d) /, " <span>$1</span> ") %}</div>
     <h2><a href="/post/{%= post._id %}">{%= post.title %}</a></h2>
 	<h3>{%= post.subtitle %}</h3>
-	<div class="meta">{%= post.date.toDateString() %}, filed under
+	<div class="meta">filed under
 	 	{%:r= post.cats.map(function (t) {
 			return '<a href="/category/'+t._id+'">'+t.name+'</a>';
 		}).join(", ") %}.

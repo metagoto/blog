@@ -1,0 +1,16 @@
+<div id="header">
+<h1><a href="/">metagoto's blog</a></h1>
+<h2>"Hi, my name is <span>metagoto</span>. I am not a web designer. I don't make things that work. 
+    I don't have a portfolio and I am not looking for a job". <span>OK</span>.</h2>
+<p>(catchy background here. though, intentionally left blank)</p>
+</div>
+
+<ul id="nav">
+<li><a href="/">Home</a></li>
+<li><a href="">Livre d'Or</a></li>
+<li><a href="/about">About</a></li>
+</ul>
+
+<ul id="cat">{% for (i in cats) : %}
+<li><a href="/category/{%= cats[i]._id %}" style="font-size:{%= 15+cats[i].count*4 %}px;" title="{%= cats[i].count %} entries">{%= cats[i].name %}</a></li>
+{% end %}</ul>
