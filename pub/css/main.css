@@ -277,6 +277,13 @@ h2.info
 	clear: both;
 }
 
+.entry blockquote {
+	border-left: 2px solid #ddd;
+	padding-left: 10px;
+	margin-right: 0;
+	color: #fff;
+}
+
 #content a
 {
 	color: #BDD8DA;
