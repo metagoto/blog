@@ -194,8 +194,9 @@ struct model
 
     std::string format_comment_content(std::string str, bool* valid = 0)
     {
+        static const std::tr1::regex reg("\\[url=", std::tr1::regex_constants::icase);
         boost::trim(str);
-        if (!str.size() || str.size() > 16000) {
+        if (!str.size() || str.size() > 16000 || regex_search(str, reg)) {
             if (valid) *valid = false;
             return std::string();
         }
