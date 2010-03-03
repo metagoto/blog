@@ -19,6 +19,8 @@ var/*
 
 template/sidebar.tweets.html
 
+pub/feed.atom
+
 blog.config
 blog.creator
 blog.files
