@@ -66,6 +66,7 @@ blog::~blog()
 bool blog::on_error404()
 {
     response.clear();
+    response << header("Status", "404 Not Found");
     if (!cache.has("error")) {
         view.assign("content", view.render("error.content"));
         view.assign("title", "404 - Page not found");
@@ -79,6 +80,7 @@ bool blog::on_error404()
 bool blog::on_error500()
 {
     response.clear();
+    response << header("Status", "500 Internal Server Error");
     response << "error 500 (something went wrong..)";
     return true;
 }
