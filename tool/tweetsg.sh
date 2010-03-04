@@ -30,6 +30,6 @@ then
   then
     exit 1
   else
-	$notify
+    $notify
   fi
 fi

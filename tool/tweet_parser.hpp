@@ -7,7 +7,6 @@
 #include <string>
 #include <vector>
 
-namespace parser {
 
 namespace qi = boost::spirit::qi;
 namespace ascii = boost::spirit::ascii;
@@ -31,36 +30,33 @@ struct tweet_parser : qi::grammar<Iterator, std::vector<std::string>()>
 
         plain =
                 raw[
-                        +(char_ - ((lit("http://") | '@' | '#') >> alnum))
-                        ][boost::bind(&Writer::plain, &writer, _1)];
+                    +(char_ - ((lit("http://") | '@' | '#') >> alnum))
+                ][boost::bind(&Writer::plain, &writer, _1)];
 
         at =
-
                 lit("@")
                 >> raw[
-                        +alnum
-                        ][boost::bind(&Writer::at, &writer, _1)];
+                       +alnum
+                   ][boost::bind(&Writer::at, &writer, _1)];
 
         hash =
-
                 lit("#")
                 >> raw[
-                        +alnum
-                        ][boost::bind(&Writer::hash, &writer, _1)];
+                       +alnum
+                   ][boost::bind(&Writer::hash, &writer, _1)];
 
         url =
-
                 lit("http://")
                 >> raw[
-                        +(alnum | '/') % '.'
-                        ][boost::bind(&Writer::url, &writer, _1)];
+                       +(alnum | '/') % '.'
+                   ][boost::bind(&Writer::url, &writer, _1)];
 
         start =
                 +( at
-                   | hash
-                   | url
-                   | plain
-                   );
+                 | hash
+                 | url
+                 | plain
+                 );
     }
 
     qi::rule<Iterator, std::string()> plain;
@@ -71,6 +67,3 @@ struct tweet_parser : qi::grammar<Iterator, std::vector<std::string>()>
 
     Writer& writer;
 };
-
-}; // ns parser
-
