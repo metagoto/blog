@@ -21,7 +21,7 @@ struct generator
     }
 
     template<typename T>
-    T gen(const T& read_file)
+    T gen(const T& read_file, bool guid_link = true)
     {
         typedef typename T::const_iterator iterator_type;
 
@@ -51,7 +51,12 @@ struct generator
                     if (parse(it, end, parser) && it == end) {
                         out << "<li>";
                         out << writer.str();
-                        out << " - <a href=\"" << guid << "\">" << date.substr(5, 11) << "</a>";
+                        if (guid_link) {
+                            out << " - <a class=\"guid\" href=\"" << guid << "\">" << date.substr(5, 11) << "</a>";
+                        }
+                        else {
+                            out << " - <span class=\"guid\">" << date.substr(5, 11) << "</span>";
+                        }
                         out << "</li>\n";
                     }
                 }

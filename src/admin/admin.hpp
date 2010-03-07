@@ -25,7 +25,6 @@ struct admin
         view().assign("posts", mod().get_posts(0, mod().count_posts()));
         view().assign("content", view().render("admin/index.content"));
         owner.make_sidebar();
-        owner.make_footer();
         return send(view().render("main"));
     }
 
@@ -40,7 +39,6 @@ struct admin
         view().assign("post", post);
         view().assign("content", view().render("admin/edit.content"));
         owner.make_sidebar();
-        owner.make_footer();
         return send(view().render("main"));
     }
 
@@ -63,7 +61,6 @@ struct admin
     {
         if (!logged()) return owner.on_error404();
         owner.make_sidebar();
-        owner.make_footer();
         view().assign("content", view().render("admin/new.content"));
         return send(view().render("main"));
     }

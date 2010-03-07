@@ -216,7 +216,7 @@ bool blog::on_tag()
 bool blog::on_feed()
 {
     if (!cache.has("feed")) {
-        view.assign("posts", mod.get_posts_for_feed(3));
+        view.assign("posts", mod.get_posts_for_feed(10));
         cache.add("feed", view.render("feed.post"));
     }
     response << header("Content-type", "application/atom+xml; charset=utf-8")
@@ -336,41 +336,21 @@ bool blog::on_tweetsg()
 
 void blog::make_stuff()
 {
-    make_header();
     make_sidebar();
-    make_footer();
 }
 
 
 void blog::make_sidebar()
 {
     if (!cache.has("sidebar")) {
-        view.assign("tags", mod.get_tags());
+        //view.assign("tags", mod.get_tags());
+        view.assign("cats", mod.get_cats());
+        view.assign("recentPosts", mod.get_recent_posts());
+        view.assign("recentComs", mod.get_recent_comments());
         make_tweets();
         cache.add("sidebar", view.render("sidebar"));
     }
     view.assign("sidebar", cache.get("sidebar"));
-}
-
-
-void blog::make_header()
-{
-    if (!cache.has("header")) {
-        view.assign("cats", mod.get_cats());
-        cache.add("header", view.render("header"));
-    }
-    view.assign("header", cache.get("header"));
-}
-
-
-void blog::make_footer()
-{
-    if (!cache.has("footer")) {
-        view.assign("recentPosts", mod.get_recent_posts());
-        view.assign("recentComs", mod.get_recent_comments());
-        cache.add("footer", view.render("footer"));
-    }
-    view.assign("footer", cache.get("footer"));
 }
 
 

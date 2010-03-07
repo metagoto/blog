@@ -57,8 +57,6 @@ struct blog
 private:
     void make_stuff();
     void make_sidebar();
-    void make_header();
-    void make_footer();
     void make_tweets();
 
     bool send(const std::string&);
@@ -71,7 +69,7 @@ private:
     model_type mod;
 
     //tmp
-    static const int items_per_page = 3;
+    static const int items_per_page = 4;
 
     typedef fcgixx::cache::hierarchic<> cache_type;
     cache_type cache;
