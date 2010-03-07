@@ -25,4 +25,4 @@ blog.config
 blog.creator
 blog.files
 blog.includes
-blog.creator.user
+blog.creator.user*

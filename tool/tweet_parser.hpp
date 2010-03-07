@@ -22,34 +22,35 @@ struct tweet_parser : qi::grammar<Iterator, std::vector<std::string>()>
     {
 
         using qi::lit;
-        using qi::lexeme;
+        using qi::raw;
+        using qi::byte_;
         using ascii::char_;
         using ascii::alnum;
-        using qi::raw;
+        using boost::bind;
 
 
         plain =
                 raw[
-                    +(char_ - ((lit("http://") | '@' | '#') >> alnum))
-                ][boost::bind(&Writer::plain, &writer, _1)];
+                    +(byte_ - ((lit("http://") | '@' | '#') >> alnum))
+                ][bind(&Writer::plain, &writer, _1)];
 
         at =
                 lit("@")
                 >> raw[
                        +alnum
-                   ][boost::bind(&Writer::at, &writer, _1)];
+                   ][bind(&Writer::at, &writer, _1)];
 
         hash =
                 lit("#")
                 >> raw[
                        +alnum
-                   ][boost::bind(&Writer::hash, &writer, _1)];
+                   ][bind(&Writer::hash, &writer, _1)];
 
         url =
                 lit("http://")
                 >> raw[
-                       +(alnum | '/') % '.'
-                   ][boost::bind(&Writer::url, &writer, _1)];
+                        +(alnum | '/' | '#' | '?' | '&') % '.'
+                   ][bind(&Writer::url, &writer, _1)];
 
         start =
                 +( at
