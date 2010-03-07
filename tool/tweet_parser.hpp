@@ -49,7 +49,7 @@ struct tweet_parser : qi::grammar<Iterator, std::vector<std::string>()>
         url =
                 lit("http://")
                 >> raw[
-                        +(alnum | '/' | '#' | '?' | '&') % '.'
+                        +(alnum | '/' | '-' | '#' | '?' | '&') % '.'
                    ][bind(&Writer::url, &writer, _1)];
 
         start =
