@@ -25,10 +25,9 @@ int main(int argc, char* argv[])
             return 1;
         }
 
-        out << "<h3>Tweets</h3>\n";
+        out << "<h3><a href=\"http://twitter.com/metagoto\">Tweets</a></h3>\n";
         out << "<ul class=\"tweets\">\n";
         out << res;
-        out << "<li><a href=\"http://twitter.com/metagoto\">More tweets..</a></li>";
         out << "</ul>\n";
 
         out.close();
