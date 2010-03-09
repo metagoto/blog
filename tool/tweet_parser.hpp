@@ -12,7 +12,7 @@ namespace qi = boost::spirit::qi;
 namespace ascii = boost::spirit::ascii;
 
 template<typename Iterator, typename Writer>
-struct tweet_parser : qi::grammar<Iterator, std::vector<std::string>()>
+struct tweet_parser : qi::grammar<Iterator>
 {
 
 
@@ -29,27 +29,30 @@ struct tweet_parser : qi::grammar<Iterator, std::vector<std::string>()>
         using boost::bind;
 
 
+        token =
+                +(alnum | '_');
+
         plain =
                 raw[
-                    +(byte_ - ((lit("http://") | '@' | '#') >> alnum))
+                    +(byte_ - ((lit("http://") | '@' | '#') >> token))
                 ][bind(&Writer::plain, &writer, _1)];
 
         at =
                 lit("@")
                 >> raw[
-                       +alnum
+                       +token
                    ][bind(&Writer::at, &writer, _1)];
 
         hash =
                 lit("#")
                 >> raw[
-                       +alnum
+                       token
                    ][bind(&Writer::hash, &writer, _1)];
 
         url =
                 lit("http://")
                 >> raw[
-                        +(alnum | '/' | '-' | '#' | '?' | '&') % '.'
+                        +(token | '/' | '-' | '#' | '?' | '&') % '.'
                    ][bind(&Writer::url, &writer, _1)];
 
         start =
@@ -60,11 +63,12 @@ struct tweet_parser : qi::grammar<Iterator, std::vector<std::string>()>
                  );
     }
 
-    qi::rule<Iterator, std::string()> plain;
-    qi::rule<Iterator, std::string()> at;
-    qi::rule<Iterator, std::string()> hash;
-    qi::rule<Iterator, std::string()> url;
-    qi::rule<Iterator, std::vector<std::string>()> start;
+    qi::rule<Iterator> token;
+    qi::rule<Iterator> plain;
+    qi::rule<Iterator> at;
+    qi::rule<Iterator> hash;
+    qi::rule<Iterator> url;
+    qi::rule<Iterator> start;
 
     Writer& writer;
 };
