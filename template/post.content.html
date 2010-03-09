@@ -2,17 +2,17 @@
 <div class="post">
     <div class="date">{%:r= post.date.toDateString().replace(/ (\d\d) /, " <span>$1</span> ") %}</div>
     <h2><a href="/post/{%= post._id %}">{%= post.title %}</a></h2>
-	<h3>{%= post.subtitle %}</h3>
-	<div class="meta">Filed under
-	 	{%:r= post.cats.map(function (t) {
-			return '<a href="/category/'+t._id+'">'+t.name+'</a>';
-		}).join(", ") %}.
-	{%= post.numComs %} comment{%= post.numComs > 1 ? "s" : ""%}
-	</div>
-	<div class="entry">{%:r= post.content %}</div>
-	<div class="foot">Tags {%:r= post.tags.map(function (t) {
-		return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
-	}).join(", ") %}</div>
+  <h3>{%= post.subtitle %}</h3>
+  <div class="meta">Filed under
+    {%:r= post.cats.map(function (t) {
+      return '<a href="/category/'+t._id+'">'+t.name+'</a>';
+    }).join(", ") %}.
+  {%= post.numComs %} comment{%= post.numComs > 1 ? "s" : ""%}
+  </div>
+  <div class="entry">{%:r= post.content %}</div>
+  <div class="foot">Tags {%:r= post.tags.map(function (t) {
+    return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
+  }).join(", ") %}</div>
 </div>
 
 {% if (post.numComs): %}
@@ -22,7 +22,7 @@
 {% for (k in post.coms) : %}
 <li>
 <strong>{% if (post.coms[k].site) : %}
-<a href="{%= post.coms[k].site %}" rel="nofollow">{%= post.coms[k].user %}</a>{% else : %}{%= post.coms[k].user %}{% end %}</strong>, 
+<a href="{%= post.coms[k].site %}">{%= post.coms[k].user %}</a>{% else : %}{%= post.coms[k].user %}{% end %}</strong>, 
 {%= post.coms[k].date.toDateString() %}
 <div>{%:h:m= post.coms[k].content %}</div>
 </li>
@@ -42,7 +42,7 @@
 <label for="user">Email*</label></p>
 
 <p><input type="text" id="site" name="site" value="" />
-<label for="site">Website</label></p>
+<label for="site">Website (we do follow)</label></p>
 
 <p><textarea id="com_con" name="com_con" cols="50" rows="20"></textarea></p>
 

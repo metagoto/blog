@@ -1,29 +1,29 @@
 
-<div id="side1">	
+<div id="side1">  
 <ul> 
 <li><a class="feed" href="http://blog.runpac.com/feed">Subscribe</a></li>
 </ul>
-	
+  
 <h3>Categories</h3>
-<ul class="bullet"> 
+<ul class="bullet cats"> 
 {% for (i in cats) : %}
  <li><a href="/category/{%= cats[i]._id %}">{%= cats[i].name %}</a> ({%= cats[i].count %})</li>
 {% end %}
 </ul>
-	
+  
 <h3>Latest Posts</h3> 
 <ul class="bullet"> 
 {% for (i in recentPosts) :%}
  <li><a href="/post/{%= recentPosts[i]._id %}">{%= recentPosts[i].title %}</a></li>
 {%end%}
 </ul>
-	
+  
 <h3>Latest Comments</h3> 
 <ul class="bullet">
 {% for (i in recentComs) :%}
  <li><a href="/post/{%= recentComs[i]._id %}#comments">{%= recentComs[i].title %}</a></li>
 {%end%}
-</ul>	
+</ul> 
 </div>
 
 <div id="side2">
@@ -32,14 +32,16 @@
 <li>La page <a href="/about">About</a> a finalement été mise à jour - <span class="guid">07 Mar 2010</span></li>
 <li>Nouveau design, back to the freaking basics - <span class="guid">07 Mar 2010</span></li> 
 </ul>
-	
+  
 {%:r= tweets %}
-	
+  
 <h3>Tags</h3> 
-<ul class="tweets"> 
-<li>Not displayed anymore!</li>
+<ul class="tags"> 
+{% for (i in tags) : %}
+ <li><a href="/tag/{%= tags[i]._id %}" rel="nofollow" title="{%= tags[i].count%} entries" style="font-size:{%= 7+tags[i].count*2 %}px;">{%= tags[i].name %}</a></li>
+{% end %}
 </ul>
-	
+  
 <h3>Links</h3> 
 <ul class="bullet">
 <li><a href="http://cpp-next.com">C++Next</a></li>

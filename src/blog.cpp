@@ -343,7 +343,7 @@ void blog::make_stuff()
 void blog::make_sidebar()
 {
     if (!cache.has("sidebar")) {
-        //view.assign("tags", mod.get_tags());
+        view.assign("tags", mod.get_tags());
         view.assign("cats", mod.get_cats());
         view.assign("recentPosts", mod.get_recent_posts());
         view.assign("recentComs", mod.get_recent_comments());

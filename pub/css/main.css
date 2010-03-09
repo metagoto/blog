@@ -8,56 +8,56 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	background: transparent;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
 }
 /*body {
   line-height: 1;
 }*/
 ol, ul {
-	list-style: none;
+  list-style: none;
 }
 blockquote, q {
-	quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+  content: '';
+  content: none;
 }
 
 /* remember to define focus styles! */
 :focus {
-	outline: 0;
+  outline: 0;
 }
 
 /* remember to highlight inserts somehow! */
 ins {
-	text-decoration: none;
+  text-decoration: none;
 }
 del {
-	text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 /* tables still need 'cellspacing="0"' in the markup */
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 /* ################# */
 
 
 body 
 {
-	font-size: 13px;
-	font-family: "Lucida Grande",georgia,"Lucida Grande",Helvetica;
-	background: #fff; 
-	color: #000;
+  font-size: 13px;
+  font-family: "Lucida Grande",georgia,"Lucida Grande",Helvetica;
+  background: #fff; 
+  color: #000;
 }
 
 a
@@ -73,10 +73,10 @@ a:hover
 
 #header
 {
-	width: 960px;
-	margin: 0 auto;
-	padding: 20px 10px 20px 10px;
-	position: relative;
+  width: 960px;
+  margin: 0 auto;
+  padding: 20px 10px 20px 10px;
+  position: relative;
 }
 
 #header h1
@@ -103,21 +103,21 @@ a:hover
 #nav
 {
   position: absolute;
-  right: 16px;
-  top: 6px;
+  right: 18px;
+  top: 8px;
 }
 
 #nav ul
 {
-	float: left;
-	list-style: none;
-	margin-left: 0;
+  float: left;
+  list-style: none;
+  margin-left: 0;
 }
 
 #nav li
 {
-	float: left;
-	margin: 0 0 4px 10px;
+  float: left;
+  margin: 0 0 8px 10px;
 }
 #nav a
 {
@@ -129,23 +129,28 @@ a:hover
   width: 164px;
   border: 1px solid #eee;
   -webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	float: right;
-	height: 1.5em;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  float: right;
+  height: 1.5em;
+}
+
+#nav input:hover
+{
+  border: 1px solid #ccc;
 }
 
 #wrap
 {
-	width: 980px;
-	margin: 0 auto;
+  width: 980px;
+  margin: 0 auto;
 }
 
 #content
 {
-	float: left;
-	width: 553px;
-	padding: 10px 16px 10px 10px;
+  float: left;
+  width: 553px;
+  padding: 10px 16px 10px 10px;
   border-right: 1px solid #eee;
   line-height: 1.4em;
 }
@@ -169,8 +174,8 @@ a:hover
   border: 1px solid #ddd;
   background: #efefef;
   -webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 #content .date span
@@ -286,23 +291,24 @@ a:hover
 }
 
 #pagi {
-	padding: 0 0 26px 0;
+  padding: 0 0 26px 0;
 }
 #pagi .prev {
-	float:left;
+  float:left;
 }
 #pagi .next {
-	float:right;
+  float:right;
 }
 #pagi a {
-	color: #888;
+  color: #888;
 }
 
 #sidebar
 {
-	float: left;
-	width: 384px;
-	padding: 0 0 10px 0;
+  float: left;
+  width: 384px;
+  padding: 0 0 10px 0;
+  font-size: 12px;
 }
 
 #sidebar h3
@@ -318,9 +324,29 @@ a:hover
   color: inherit;
 }
 
+#sidebar a
+{
+  font-weight: normal;
+}
+
+#sidebar .cats a
+{
+  font-weight: bold;
+  font-size: 13px;
+}
+
+#sidebar .tags li
+{
+  display: inline;
+}
+#sidebar .tags a
+{
+  color: #666;
+}
+
 #sidebar ul
 {
-  margin: 0 0 18px 0;
+  margin: 0 0 20px 0;
 }
 
 .tweets
@@ -329,12 +355,7 @@ a:hover
 }
 .tweets li
 {
-  margin: 5px 0 0 0;
-}
-
-.tweets a
-{
-  font-weight: normal;
+  margin: 8px 0 0 0;
 }
 .tweets .guid
 {
@@ -344,13 +365,15 @@ a:hover
 .feed {
   padding: 0 0 0 19px;
   background: url("feed.png") no-repeat 0 50%;
+  font-weight: bold !important;
+  font-size: 13px;
 }
+
 
 #sidebar ul.bullet
 {
   list-style: disc outside;
   margin-left: 16px;
-  font-size: 12px;
   color: #aaa;
 }
 #sidebar ul.bullet li
@@ -383,7 +406,7 @@ a:hover
   margin: 0 auto;
   padding: 10px;
   background: #000;
-  border-top: 3px solid #888;	
+  border-top: 3px solid #888; 
   text-align: center;
   color: #ddd;
   font-size: 10px;
@@ -406,39 +429,39 @@ ol.coms li {
 }
 
 form {
-	padding: 10px 0 16px 0;
+  padding: 10px 0 16px 0;
 }
 
 form p {
-	padding: 0.5em 0;
+  padding: 0.5em 0;
 }
 
 form a {
-	float: right;
+  float: right;
 }
 textarea {
-	width: 100%;
-	height: 200px;
-	font-size: 13px;
+  width: 100%;
+  height: 200px;
+  font-size: 13px;
 }
 
 label {
-	float: left;
-	margin-left: 10px;
+  float: left;
+  margin-left: 10px;
 }
 
 input {
-	width: 200px;
-	float: left;
-	clear: both;
-	font-size: 13px;
+  width: 200px;
+  float: left;
+  clear: both;
+  font-size: 13px;
 }
-	
+  
 input[type=submit], input[type=button] {
-	float: left;
-	clear: none;
-	width: 80px;
-	margin: 0 1em 0 0;
+  float: left;
+  clear: none;
+  width: 80px;
+  margin: 0 1em 0 0;
 }
 
 /* ###### */

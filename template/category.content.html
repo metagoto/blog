@@ -2,19 +2,19 @@
 
 {% for (i in posts) : %}
 <div class="post">
-	<div class="date">{%:r= posts[i].date.toDateString().replace(/ (\d\d) /, " <span>$1</span> ") %}</div>
-	<h2><a href="/post/{%= posts[i]._id %}">{%= posts[i].title %}</a></h2>
-	<h3>{%= posts[i].subtitle %}</h3>
-	<div class="meta">Filed under
-	 	{%:r= posts[i].cats.map(function (t) {
-			return '<a href="/category/'+t._id+'">'+t.name+'</a>';
-		}).join(", ") %}.
-	{%= posts[i].numComs %} comment{%= posts[i].numComs > 1 ? "s" : ""%}
-	</div>
-	<div class="entry">{%:r= posts[i].content %}</div>
-	<div class="foot">Tags {%:r= posts[i].tags.map(function (t) {
-		return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
-	}).join(", ") %}</div>
+  <div class="date">{%:r= posts[i].date.toDateString().replace(/ (\d\d) /, " <span>$1</span> ") %}</div>
+  <h2><a href="/post/{%= posts[i]._id %}">{%= posts[i].title %}</a></h2>
+  <h3>{%= posts[i].subtitle %}</h3>
+  <div class="meta">Filed under
+    {%:r= posts[i].cats.map(function (t) {
+      return '<a href="/category/'+t._id+'">'+t.name+'</a>';
+    }).join(", ") %}.
+  {%= posts[i].numComs %} comment{%= posts[i].numComs > 1 ? "s" : ""%}
+  </div>
+  <div class="entry">{%:r= posts[i].content %}</div>
+  <div class="foot">Tags {%:r= posts[i].tags.map(function (t) {
+    return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
+  }).join(", ") %}</div>
 </div>
 {% end %}
 
