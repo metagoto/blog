@@ -508,11 +508,11 @@ input[type=submit], input[type=button] {
 .jsh-sql .keyword { color: #00f; }
 
 .jsh-xml .comment { color: #FF7D27; }
-.jsh-xml .tag { color: #aaa; }
+.jsh-xml .tag { color: #999; }
 .jsh-xml .prefix { color: #94FE9A; }
-.jsh-xml .tag-name { color: #9CCFF4; }
-.jsh-xml .attribute { color: #EBDB8D; }
-.jsh-xml .attribute-value { color: #FF9E7B; }
+.jsh-xml .tag-name { color: #5a9595; }
+.jsh-xml .attribute { color: #aB9B6D; }
+.jsh-xml .attribute-value { color: #dF6E6B; }
 .jsh-xml .cdata { color: #888; }
 .jsh-xml .pi { color: #AEC4DE; font-style: italic; }
 .jsh-xml .doctype { color: #7DFDFA; }
