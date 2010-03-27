@@ -97,8 +97,8 @@ LIBS = [
   'boost_thread',
   'boost_filesystem',
   'boost_system',
-  'boost_program_options',
-  'mongoclient'
+  'mongoclient',
+  'boost_program_options'
 ]
 
 env.Append(CXXFLAGS=CXXFLAGS)
