@@ -135,14 +135,13 @@ bool blog::on_post()
 bool blog::on_post_post()
 {
     const string& id = request.get_param<string>("id");
-    const string& key = string("post") + id;
+    //const string& key = string("post") + id;
     if (!mod.post_exists(id)) {
         return on_error404();
     }
     if (mod.add_new_comment(id, request.get_post_params())) {
-        cache.del("index");
-        cache.del("footer");
-        cache.del(key); // rajouter un delete sur la category et les tags du post!!!
+        cache.clear();
+        view.clear();
         return on_post();
     }
     return send("Invalid form");
