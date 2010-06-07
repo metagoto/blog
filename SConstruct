@@ -9,6 +9,9 @@ OPTIONS = {
   '--v8-dir': {
     'help': 'v8 installation directory'
   },
+  '--ioxx-dir': {
+    'help': 'ioxx installation directory'
+  },
   '--fcgixx-dir': {
     'help': 'fcgixx installation directory'
   },
@@ -52,6 +55,7 @@ SetOptions(OPTIONS)
 
 AddBuildPath(env, GetOption('--boost-dir'))
 AddBuildPath(env, GetOption('--v8-dir'))
+AddBuildPath(env, GetOption('--ioxx-dir'))
 AddBuildPath(env, GetOption('--fcgixx-dir'))
 
 if env.GetOption('--extra-dir') is not None:
