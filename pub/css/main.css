@@ -3,7 +3,7 @@ html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
+small, strike, strong, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
@@ -55,7 +55,7 @@ table {
 body 
 {
   font-size: 13px;
-  font-family: "Lucida Grande",georgia,"Lucida Grande",Helvetica;
+  font-family: "Trebuchet MS","Lucida Grande",georgia,"Lucida Grande",Helvetica;
   background: #fff; 
   color: #000;
 }
@@ -81,30 +81,38 @@ a:hover
 
 #header h1
 {
-  font: 30px georgia;
+  font: 36px georgia;
   font-weight: bold;
+  font-style: italic;
+  letter-spacing: -2px;
 }
 
 #header h1 a
 {
   color: #000;
+  text-shadow: 1px 1px 3px #000;
+  
 }
 #header h1 a:hover
 {
   text-decoration: none;
+  text-shadow: 1px 1px 10px #000;
 }
 
 #header h2
 {
   font-weight: normal;
-  font-size: 11px;
+  font-size: 12px;
+  font-style: italic;
+  text-shadow: 1px 1px 0px #ddd;
+  margin: 2px 0 0 0;
 }
 
 #nav
 {
   position: absolute;
   right: 18px;
-  top: 8px;
+  top: 14px;
 }
 
 #nav ul
@@ -117,11 +125,12 @@ a:hover
 #nav li
 {
   float: left;
-  margin: 0 0 8px 10px;
+  margin: 0 1px 8px 11px;
 }
 #nav a
 {
   color: #aaa;
+  font-size: 14px;
 }
 
 #nav input
@@ -188,26 +197,34 @@ a:hover
 {
   margin: 0 0 2px 0;
   font: 20px georgia;
+  font-style: italic;
+  text-shadow: 1px 1px 0px #000;  
+}
+#content h2 a:hover {
+  text-shadow: 1px 1px 6px #000;
+  text-decoration: none;
 }
 
 #content .meta
 {
-  font-size: 10px;
+  font-size: 12px;
   color: #888;
+  margin: 1px 0 0 0;
 }
 
 #content .foot
 {
-  font-size: 10px;
+  font-size: 12px;
   color: #888;
   margin: 10px 0 0 0;
 }
 
 #content h3
 {
-  font: 14px georgia;
+  font: 14px "trebuchet MS",georgia;
   color: #888;
   font-weight: bold;
+  font-style: italic;
 }
 
 #content h2.info
@@ -215,6 +232,7 @@ a:hover
   margin: 0 0 20px 0;
   font: 20px georgia;
   color: #888;
+  font-style: italic;
 }
 
 #content h3.info
@@ -232,7 +250,7 @@ a:hover
 #content .entry h3
 {
   margin: 16px 0 10px 0;
-  font-size: 15px;
+  font-size: 17px;
   color: #000;
 }
 
@@ -256,7 +274,7 @@ a:hover
 {
   border: 1px solid #eee;
   background: #fbfbfb;
-  font: 12px 'Andale Mono', 'Courier New', monospace;
+  font: 12px monospace,'Andale Mono', 'Courier New', monospace;
   padding: 2px 0 2px 4px;
   margin: 10px 0 10px 0;
 }
@@ -265,7 +283,7 @@ a:hover
 {
   border: 1px solid #eee;
   background: #fbfbfb;
-  font: 12px 'Andale Mono', 'Courier New', monospace;
+  font: 12px monospace,'Andale Mono', 'Courier New', monospace;
   padding-left: 1px;
   padding-right: 1px;
 }
@@ -308,7 +326,7 @@ a:hover
   float: left;
   width: 384px;
   padding: 0 0 10px 0;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 #sidebar h3
@@ -316,6 +334,8 @@ a:hover
   margin: 0 0 10px 0;
   font: 17px georgia;
   color: #888;
+  font-style: italic;
+  text-shadow: 1px 1px 0px #000;
 }
 
 #sidebar h3 a
@@ -332,7 +352,7 @@ a:hover
 #sidebar .cats a
 {
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 #sidebar .tags li
@@ -351,13 +371,13 @@ a:hover
 
 .tweets
 {
-  font-size: 10px;
+  font-size: 11px;
 }
 .tweets li
 {
-  margin: 8px 0 0 0;
+  margin: 10px 0 0 0;
 }
-.tweets .guid
+.guid
 {
   color: #888;
 }
@@ -378,7 +398,7 @@ a:hover
 }
 #sidebar ul.bullet li
 {
-  margin: 0 0 4px 0;
+  margin: 0 0 6px 0;
 }
 
 #side1
@@ -409,7 +429,7 @@ a:hover
   border-top: 3px solid #888; 
   text-align: center;
   color: #ddd;
-  font-size: 10px;
+  font-size: 11px;
 }
 #footer a
 {
@@ -429,25 +449,30 @@ ol.coms li {
 }
 
 form {
-  padding: 10px 0 16px 0;
+  padding: 10px 0 50px 0;
 }
 
 form p {
-  padding: 0.5em 0;
+  padding: 0 0 !important;
+  margin: 0 !important;
+  clear: both;
 }
 
 form a {
   float: right;
+  margin: 10px 0 0 0;
 }
 textarea {
   width: 100%;
   height: 200px;
   font-size: 13px;
+  margin: 4px 0 4px 0;
+  font-family: "Trebuchet MS";
 }
 
 label {
   float: left;
-  margin-left: 10px;
+  margin: 6px 0 0 10px;
 }
 
 input {
@@ -455,13 +480,14 @@ input {
   float: left;
   clear: both;
   font-size: 13px;
+  margin: 4px 0 4px 0;
 }
   
 input[type=submit], input[type=button] {
   float: left;
   clear: none;
   width: 80px;
-  margin: 0 1em 0 0;
+  margin: 8px 1em 4px 0;
 }
 
 /* ###### */

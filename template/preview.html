@@ -1,4 +1,4 @@
 <strong>{% if (site) : %}
 <a href="{%= site %}">{%= user %}</a>{% else : %}{%= user %}{% end %}</strong>,
-{%= (new Date).toDateString().toLowerCase() %} [PREVIEW]
+<span class="guid">{%= (new Date).toDateString() %}</span> [PREVIEW]
 <div>{%:h:m= content %}</div>

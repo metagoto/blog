@@ -23,14 +23,14 @@
 <li>
 <strong>{% if (post.coms[k].site) : %}
 <a href="{%= post.coms[k].site %}">{%= post.coms[k].user %}</a>{% else : %}{%= post.coms[k].user %}{% end %}</strong>, 
-{%= post.coms[k].date.toDateString() %}
+<span class="guid">{%= post.coms[k].date.toDateString() %}</span>
 <div>{%:h:m= post.coms[k].content %}</div>
 </li>
 {% end %}
 </ol>
 {% end %}
 
-<h3 class="info">Add a comment</h3>
+<h3 class="info">Your Comment</h3>
 <div id="preview-comment"> </div>
 
 <form method="post" action="/post/{%= post._id %}">
@@ -45,6 +45,9 @@
 <label for="site">Website (we do follow)</label></p>
 
 <p><textarea id="com_con" name="com_con" cols="50" rows="20"></textarea></p>
+
+<p><input type="text" id="check" name="check" value="" />
+<label for="site">= 1 + 1</label></p>
 
 <p><input type="submit" id="submit" name="submit" value="Send" />
 <input type="button" id="previewb" value="Preview"/>
