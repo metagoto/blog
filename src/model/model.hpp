@@ -188,9 +188,15 @@ struct model
 
     bool valid(const entity& e)
     {
-        return e.isNull();
+        return !e.isNull();
     }
 
+
+    bool check_comment_spam(std::string str)
+    {
+        boost::trim(str);
+        return (str == "2"); // i know
+    }
 
     std::string format_comment_content(std::string str, bool* valid = 0)
     {
@@ -240,21 +246,25 @@ struct model
     }
 
     template<typename T>
-    bool add_new_comment(const std::string& id, const T& params)
+    bool add_new_comment(const std::string& id, T& params)
     {
         using std::string;
 
+        if (!check_comment_spam(params["check"]))
+            return false;
+
         bool valid = false;
-        const string& content = format_comment_content(params.at("com_con"), &valid);
+
+        const string& content = format_comment_content(params["com_con"], &valid);
         if (!valid) return false;
 
-        const string& user = format_comment_user(params.at("email"), &valid);
+        const string& user = format_comment_user(params["email"], &valid);
         if (!valid) return false;
 
-        const string& email = format_comment_email(params.at("user"), &valid);
+        const string& email = format_comment_email(params["user"], &valid);
         if (!valid) return false;
 
-        const string& site = format_comment_site(params.at("site"));
+        const string& site = format_comment_site(params["site"]);
 
         db.update(ns_post, BSON("_id" << id),
             BSON("$push" << BSON( "coms" <<

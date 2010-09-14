@@ -24,7 +24,6 @@ blog::blog()
     : sess(request, response)
     , adm(this)
 {
-
     dispatcher::bind("__500__",  &blog::on_error500);
     dispatcher::bind("error",    &blog::on_error404);
     dispatcher::bind("about",    &blog::on_about);
@@ -119,7 +118,7 @@ bool blog::on_post()
     if (!cache.has(key)) {
         if (!cache.has("posts")) cache.add("posts", "");
         const model::entity& post = mod.get_post(id);
-        if (mod.valid(post)) {
+        if (!mod.valid(post)) {
             return on_error404();
         }
         view.assign("post", post);
@@ -135,11 +134,10 @@ bool blog::on_post()
 bool blog::on_post_post()
 {
     const string& id = request.get_param<string>("id");
-    //const string& key = string("post") + id;
     if (!mod.post_exists(id)) {
         return on_error404();
     }
-    if (mod.add_new_comment(id, request.get_post_params())) {
+    if (mod.add_new_comment(id, const_cast<request_type::params_type&>(request.get_post_params()))) {
         cache.clear();
         view.clear();
         return on_post();
@@ -265,9 +263,9 @@ bool blog::on_blank()
 
 bool blog::on_reset()
 {
-    response << cache.check();
-    response << cache.check_list();
-    response << "now clearing...\n";
+    //response << cache.check();
+    //response << cache.check_list();
+    //response << "now clearing...\n";
     view.clear();
     cache.clear();
     return on_index();

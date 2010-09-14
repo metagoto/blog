@@ -33,7 +33,7 @@ struct admin
         if (!logged()) return owner.on_error404();
         const std::string& id = request().template get_param<std::string>("id");
         const typename model_type::entity& post = mod().get_post_raw(id);
-        if (mod().valid(post)) {
+        if (!mod().valid(post)) {
             return owner.on_error404();
         }
         view().assign("post", post);
@@ -47,7 +47,7 @@ struct admin
         if (!logged()) return owner.on_error404();
         const std::string& id = request().template get_param<std::string>("id");
         const typename model_type::entity& post = mod().get_post_raw(id);
-        if (mod().valid(post)) {
+        if (!mod().valid(post)) {
             return owner.on_error404();
         }
         if (mod().update_post(id, request().get_post_params())) {
