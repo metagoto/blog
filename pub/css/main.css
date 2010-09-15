@@ -71,6 +71,16 @@ a:hover
   text-decoration: underline;
 }
 
+sup {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  vertical-align: text-top;
+  position: relative;
+  top: -5px;
+  padding-left: 1px;
+}
+
 #header
 {
   width: 960px;
@@ -276,7 +286,7 @@ a:hover
   background: #fbfbfb;
   font: 12px monospace,'Andale Mono', 'Courier New', monospace;
   padding: 2px 0 2px 4px;
-  margin: 10px 0 10px 0;
+  margin: 14px 0 14px 0;
 }
 
 #content code
