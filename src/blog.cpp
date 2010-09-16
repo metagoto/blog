@@ -140,7 +140,10 @@ bool blog::on_post_post()
     if (mod.add_new_comment(id, const_cast<request_type::params_type&>(request.get_post_params()))) {
         cache.clear();
         view.clear();
-        return on_post();
+        string const& uri = "/post/"+id;
+        response << header("Status", "302 Found")
+                 << header("Location", uri.c_str());
+        return true;
     }
     return send("Invalid form");
 }
