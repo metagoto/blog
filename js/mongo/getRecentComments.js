@@ -1,14 +1,15 @@
-function (limit) {
-
-    var limit = limit || 10;
+function () {
 
     var r = [];
 
-    db.recCom.find( )
-             .sort( { $natural: -1 } )
-             .limit(limit)
-             .forEach(function(o) {
-        r.push(db.post.findOne({_id: o._id}, {title:1}));
+    db.state.findOne( {_id: 'recCom'}, {'value':1} )
+      .value
+      .forEach(function(pair) {
+        r.unshift({
+          post: db.post.findOne({_id: pair[0]}, {title:1})
+         ,user: pair[1]
+        });
     });
+
     return r;
 }

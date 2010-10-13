@@ -21,7 +21,7 @@
 <h3>Latest Comments</h3> 
 <ul class="bullet">
 {% for (i in recentComs) :%}
- <li><a href="/post/{%= recentComs[i]._id %}#comments">{%= recentComs[i].title %}</a></li>
+ <li><a href="/post/{%= recentComs[i].post._id %}#comments">{%= recentComs[i].user %}</a> - {%= recentComs[i].post.title %}</li>
 {%end%}
 </ul> 
 </div>

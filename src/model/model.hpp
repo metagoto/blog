@@ -19,8 +19,8 @@ static const char* ns_post = "blogx.post";
 static const char* ns_cat  = "blogx.cat";
 static const char* ns_tag  = "blogx.tag";
 static const char* ns_user = "blogx.user";
-static const char* ns_rcom = "blogx.recCom";
 static const char* ns_sysjs= "blogx.system.js";
+
 
 
 struct model
@@ -49,6 +49,7 @@ struct model
         register_mongo_func("getRecentComments");
         register_mongo_func("getPostRaw");
         register_mongo_func("getPostsForFeed");
+        register_mongo_func("addRecentComment");
 
     }
 
@@ -95,9 +96,17 @@ struct model
     {
         static mongo::BSONObj info;
         mongo::BSONElement ret;
-        mongo::BSONObj args = BSON("0" << limit);
-        db.eval(ns_db, "function (limit) { return getRecentComments(limit); }", info, ret, &args); //bool ok
+        mongo::BSONObj args;
+        db.eval(ns_db, "function () { return getRecentComments(); }", info, ret, &args); //bool ok
         return ret;
+    }
+
+    void add_recent_comment(const std::string& id, const std::string& user, int limit = 10)
+    {
+        static mongo::BSONObj info;
+        mongo::BSONElement ret;
+        mongo::BSONObj args = BSON("0" << id << "1" << user << "2" << limit);
+        db.eval(ns_db, "function (id, user, limit) { return addRecentComment(id, user, limit); }", info, ret, &args); //bool ok
     }
 
     entity get_post(const std::string& id)
@@ -277,7 +286,7 @@ struct model
             )
         ));
 
-        db.insert(ns_rcom, BSON("_id" << id));
+        add_recent_comment(id, user);
 
         return true;
     }
