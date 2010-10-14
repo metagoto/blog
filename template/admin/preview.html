@@ -1,13 +1,12 @@
-<div class="date">{%:r= post.date.toDateString().replace(/ (\d\d) /, " <span>$1</span> ") %}</div>
-<h2><a href="/post/{%= post._id %}">{%= post.title %}</a></h2>
-<h3>{%= post.subtitle %}</h3>
-<div class="meta">filed under
- 	{%:r= post.cats.map(function (t) {
-		return '<a href="/category/'+t._id+'">'+t.name+'</a>';
-	}).join(", ") %}.
-{%= post.numComs %} comment{%= post.numComs > 1 ? "s" : ""%}
+<div class="meta">
+  <p>{%:r= post.date.toDateString() %}</p>
+  <p>{%:r= post.cats.map(function (t) {
+    return '<a href="/category/'+t._id+'">'+t.name+'</a>';
+  }).join(", ") %}</p>
+  <p>{%:r= post.tags.map(function (t) {
+    return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
+  }).join(", ") %}</p>
+  <p>{%= post.numComs %} comment{%= post.numComs > 1 ? "s" : ""%}</p>
 </div>
+<h2><a href="/post/{%= post._id %}">{%= post.title %}</a></h2>
 <div class="entry">{%:r= post.content %}</div>
-<div class="foot">tags {%:r= post.tags.map(function (t) {
-	return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
-}).join(", ") %}</div>

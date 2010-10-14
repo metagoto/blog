@@ -1,4 +1,7 @@
-<strong>{% if (site) : %}
-<a href="{%= site %}">{%= user %}</a>{% else : %}{%= user %}{% end %}</strong>,
-<span class="guid">{%= (new Date).toDateString() %}</span> [PREVIEW]
-<div>{%:h:m= content %}</div>
+<div class="meta">
+<p>{%= (new Date).toDateString() %}</p>
+<p>{% if (site) : %}<a href="{%= site %}">{%= user %}</a>{% else : %}{%= user %}{% end %}</p>
+<p>[PREVIEW]</p>
+</div>
+<div class="entry">{%:h:m= content %}</div>
+<hr/>

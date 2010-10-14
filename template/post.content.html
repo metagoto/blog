@@ -1,52 +1,48 @@
-
 <div class="post">
-    <div class="date">{%:r= post.date.toDateString().replace(/ (\d\d) /, " <span>$1</span> ") %}</div>
-    <h2><a href="/post/{%= post._id %}">{%= post.title %}</a></h2>
-  <h3>{%= post.subtitle %}</h3>
-  <div class="meta">Filed under
-    {%:r= post.cats.map(function (t) {
+  <div class="meta">
+    <p>{%:r= post.date.toDateString() %}</p>
+    <p>{%:r= post.cats.map(function (t) {
       return '<a href="/category/'+t._id+'">'+t.name+'</a>';
-    }).join(", ") %}.
-  {%= post.numComs %} comment{%= post.numComs > 1 ? "s" : ""%}
+    }).join(", ") %}</p>
+    <p>{%:r= post.tags.map(function (t) {
+      return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
+    }).join(", ") %}</p>
+    <p>{%= post.numComs %} comment{%= post.numComs > 1 ? "s" : ""%}</p>
   </div>
+  <h2><a href="/post/{%= post._id %}">{%= post.title %}</a></h2>
   <div class="entry">{%:r= post.content %}</div>
-  <div class="foot">Tags {%:r= post.tags.map(function (t) {
-    return '<a href="/tag/'+t._id+'">'+t.name+'</a>';
-  }).join(", ") %}</div>
 </div>
 
 {% if (post.numComs): %}
-<h3 id="comments" class="info">Comments</h3>
-
-<ol class="coms">
+<hr/>
 {% for (k in post.coms) : %}
-<li>
-<strong>{% if (post.coms[k].site) : %}
-<a href="{%= post.coms[k].site %}">{%= post.coms[k].user %}</a>{% else : %}{%= post.coms[k].user %}{% end %}</strong>, 
-<span class="guid">{%= post.coms[k].date.toDateString() %}</span>
-<div>{%:h:m= post.coms[k].content %}</div>
-</li>
+<div class="com">
+ <div class="meta">
+   <p>{%= post.coms[k].date.toDateString() %}</p>
+   <p>{% if (post.coms[k].site) : %}<a href="{%= post.coms[k].site %}">{%= post.coms[k].user %}</a>{% else : %}{%= post.coms[k].user %}{% end %}</p>
+ </div>
+<div class="entry">{%:h:m= post.coms[k].content %}</div>
+</div>
 {% end %}
-</ol>
 {% end %}
 
-<h3 class="info">Your Comment</h3>
+<hr/>
 <div id="preview-comment"> </div>
 
 <form method="post" action="/post/{%= post._id %}">
 
-<p><input type="text" id="email" name="email" value="" />
+<p><input type="text" id="email" name="email" value="" maxlength="40" />
 <label for="email">Username*</label></p>
 
-<p><input type="text" id="user" name="user" value="" />
+<p><input type="text" id="user" name="user" value="" maxlength="80" />
 <label for="user">Email*</label></p>
 
-<p><input type="text" id="site" name="site" value="" />
+<p><input type="text" id="site" name="site" value="" maxlength="100" />
 <label for="site">Website (we do follow)</label></p>
 
 <p><textarea id="com_con" name="com_con" cols="50" rows="20"></textarea></p>
 
-<p><input type="text" id="check" name="check" value="" />
+<p><input type="text" id="check" name="check" value="" maxlength="8" />
 <label for="check">= 1 + 1</label></p>
 
 <p><input type="submit" id="submit" name="submit" value="Send" />

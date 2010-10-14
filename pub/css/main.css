@@ -15,10 +15,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
+  font-weight: normal;
 }
-/*body {
-  line-height: 1;
-}*/
 ol, ul {
   list-style: none;
 }
@@ -30,12 +28,10 @@ q:before, q:after {
   content: '';
   content: none;
 }
-
 /* remember to define focus styles! */
 :focus {
   outline: 0;
 }
-
 /* remember to highlight inserts somehow! */
 ins {
   text-decoration: none;
@@ -43,7 +39,6 @@ ins {
 del {
   text-decoration: line-through;
 }
-
 /* tables still need 'cellspacing="0"' in the markup */
 table {
   border-collapse: collapse;
@@ -52,23 +47,22 @@ table {
 /* ################# */
 
 
-body 
-{
-  font-size: 13px;
-  font-family: "Trebuchet MS","Lucida Grande",georgia,"Lucida Grande",Helvetica;
+body {
+  font-size: 15px;
+  font-family: georgia,'Trebuchet MS',Helvetica,"Lucida Grande";
   background: #fff; 
   color: #000;
 }
 
-a
-{
-  text-decoration: none;
-  color: #004A99;
-  font-weight: bold;
+a {
+  color: #444;
 }
-a:hover
-{
-  text-decoration: underline;
+a:hover {
+  color: #000;
+}
+
+strong {
+  font-weight: bold;
 }
 
 sup {
@@ -81,230 +75,123 @@ sup {
   padding-left: 1px;
 }
 
-#header
-{
-  width: 960px;
+#header {
+  width: 780px;
   margin: 0 auto;
-  padding: 20px 10px 20px 10px;
-  position: relative;
+  padding: 36px 0 30px 0;
+  text-align: center;
+}
+#header p {
+    visibility: hidden;
+}
+#header:hover p {
+    visibility: visible;
 }
 
-#header h1
-{
-  font: 36px georgia;
+h1 {
+  font: 40px georgia;
   font-weight: bold;
   font-style: italic;
   letter-spacing: -2px;
 }
 
-#header h1 a
-{
+h1 a {
   color: #000;
-  text-shadow: 1px 1px 3px #000;
-  
-}
-#header h1 a:hover
-{
   text-decoration: none;
-  text-shadow: 1px 1px 10px #000;
+}
+h1 a:hover {
+  text-decoration: none;
 }
 
-#header h2
-{
-  font-weight: normal;
-  font-size: 12px;
-  font-style: italic;
-  text-shadow: 1px 1px 0px #ddd;
-  margin: 2px 0 0 0;
-}
-
-#nav
-{
-  position: absolute;
-  right: 18px;
-  top: 14px;
-}
-
-#nav ul
-{
-  float: left;
-  list-style: none;
-  margin-left: 0;
-}
-
-#nav li
-{
-  float: left;
-  margin: 0 1px 8px 11px;
-}
-#nav a
-{
-  color: #aaa;
-  font-size: 14px;
-}
-
-#nav input
-{
-  width: 164px;
-  border: 1px solid #eee;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  float: right;
-  height: 1.5em;
-}
-
-#nav input:hover
-{
-  border: 1px solid #ccc;
-}
-
-#wrap
-{
-  width: 980px;
-  margin: 0 auto;
-}
-
-#content
-{
-  float: left;
-  width: 553px;
-  padding: 10px 16px 10px 10px;
-  border-right: 1px solid #eee;
+#wrap {
+  width: 600px;
+  margin: 0 auto 30px auto;
   line-height: 1.4em;
 }
 
-#content .post
-{
-  margin: 0 0 30px 0;
+.post {
+  margin: 0 0 40px 0;
+  position: relative;
+  min-height: 110px;
 }
 
-#content .date
-{
+.meta {
   float: left;
-  margin: 0 10px 10px 0;
-  padding: 4px;
-  width: 30px;
-  font: 11px georgia;
-  line-height: 1.1em;
-  color: #444;
-  font-weight: bold;
-  text-align: center;
-  border: 1px solid #ddd;
-  background: #efefef;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  margin: 3px 0 0 -134px;  
+  width: 120px;
+  text-align: right;
+  font-size: 13px;
+  color: #aaa;
+  line-height: 1.2em;
+  overflow: hidden;
 }
-
-#content .date span
-{
-  color: #800000;
-  font-size: 12px;
+.meta a {
+  color: #aaa;
 }
-
-#content h2
-{
-  margin: 0 0 2px 0;
-  font: 20px georgia;
-  font-style: italic;
-  text-shadow: 1px 1px 0px #000;  
-}
-#content h2 a:hover {
-  text-shadow: 1px 1px 6px #000;
-  text-decoration: none;
-}
-
-#content .meta
-{
-  font-size: 12px;
-  color: #888;
-  margin: 1px 0 0 0;
-}
-
-#content .foot
-{
-  font-size: 12px;
-  color: #888;
-  margin: 10px 0 0 0;
-}
-
-#content h3
-{
-  font: 14px "trebuchet MS",georgia;
-  color: #888;
-  font-weight: bold;
-  font-style: italic;
-}
-
-#content h2.info
-{
-  margin: 0 0 20px 0;
-  font: 20px georgia;
-  color: #888;
-  font-style: italic;
-}
-
-#content h3.info
-{
-  margin: 16px 0 10px 0;
-  font: 17px georgia;
-  color: #888;
-}
-
-#content .entry
-{
-  clear: both;
-}
-
-#content .entry h3
-{
-  margin: 16px 0 10px 0;
-  font-size: 17px;
+.meta a:hover {
   color: #000;
 }
-
-#content p
-{
-  margin: 10px 0 10px 0;
+.meta p {
+  margin: 0 0 6px 0;
 }
 
-#content ul
-{
+h2 {
+  font-size: 26px;
+  margin: 0 0 20px 0;
+  font-family: Helvetica;
+}
+
+h2 a {
+  color: #000;
+  text-decoration: none;
+}
+h2 a:hover {
+  color: #444;
+}
+
+h3 {
+  margin: 20px 0 0 0;
+  font-size: 20px;
+}
+h2.info {
+  color: #aaa;
+  text-align: center;
+  font-family: georgia,'Trebuchet MS',Helvetica,"Lucida Grande";
+  margin: 0px 0 30px 0;  
+}
+
+.entry p {
+  margin: 12px 0;
+}
+
+pre {
+  border: 1px solid #eee;
+  background: #fcfcfc;
+  font: 13px monospace,'Andale Mono', 'Courier New', monospace;
+  padding: 2px 0 2px 4px;
+  margin: 14px 0 14px 0;
+}
+code {
+  border: 1px solid #eee;
+  background: #fbfbfb;
+  font: 13px monospace,'Andale Mono', 'Courier New', monospace;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+pre code {
+  border: none;
+}
+
+ul {
   list-style: disc outside;
   margin: 10px 0 10px 32px ;
 }
 
-#content li
-{
-  margin: 6px 0 6px 0;
+li {
+  margin: 2px 0 2px 0;
 }
 
-#content pre
-{
-  border: 1px solid #eee;
-  background: #fbfbfb;
-  font: 12px monospace,'Andale Mono', 'Courier New', monospace;
-  padding: 2px 0 2px 4px;
-  margin: 14px 0 14px 0;
-}
-
-#content code
-{
-  border: 1px solid #eee;
-  background: #fbfbfb;
-  font: 12px monospace,'Andale Mono', 'Courier New', monospace;
-  padding-left: 1px;
-  padding-right: 1px;
-}
-
-#content pre code
-{
-  border: none;
-}
-
-#content blockquote
-{
+blockquote {
   background: transparent url(quote.png) no-repeat 0 0;
   margin: 10px 0 10px 16px;
   padding: 0 0 0 28px;
@@ -313,13 +200,18 @@ sup {
   font-style: italic;
 }
 
-#content abbr
-{
+abbr {
   border-bottom: 1px dotted #888;
 }
 
+
+.com, #preview-comment .entry {
+  margin: 0 0 30px 0;
+  min-height: 40px;
+}
+
 #pagi {
-  padding: 0 0 26px 0;
+  padding: 0 0 20px 0;
 }
 #pagi .prev {
   float:left;
@@ -327,139 +219,124 @@ sup {
 #pagi .next {
   float:right;
 }
-#pagi a {
-  color: #888;
-}
 
-#sidebar
-{
-  float: left;
-  width: 384px;
-  padding: 0 0 10px 0;
+
+#sidebar {
+  background: #000;
+  color: #ccc;
+  padding: 20px 0;
   font-size: 13px;
 }
 
-#sidebar h3
-{
-  margin: 0 0 10px 0;
-  font: 17px georgia;
-  color: #888;
-  font-style: italic;
-  text-shadow: 1px 1px 0px #000;
+#sidebar .wrap {
+  width: 600px;
+  margin: 0 auto;
+  line-height: 1.4em;
 }
 
-#sidebar h3 a
-{
-  font-weight: normal;
-  color: inherit;
+.wrap ul {
+  list-style: none;
+  margin: 10px 0 10px 0 ;
 }
-
-#sidebar a
-{
-  font-weight: normal;
-}
-
-#sidebar .cats a
-{
-  font-weight: bold;
-  font-size: 14px;
-}
-
-#sidebar .tags li
-{
+.wrap li {
+  margin: 2px 0 2px 0;
   display: inline;
 }
-#sidebar .tags a
-{
-  color: #666;
+
+.tweets li {
+  margin: 2px 0 6px 0;
+  display: block;
 }
 
-#sidebar ul
-{
-  margin: 0 0 20px 0;
-}
-
-.tweets
-{
-  font-size: 11px;
-}
-.tweets li
-{
-  margin: 10px 0 0 0;
-}
-.guid
-{
+.wrap a {
   color: #888;
+}
+.wrap a:hover {
+  color: #fff;
+}
+a.guid {
+  color: #444;
+}
+
+.wrap h3 {
+  margin-top: 30px;
+  color: #fff;
+}
+.wrap h3 a {
+  color: #fff;
+  text-decoration: none;
+}
+.wrap h3 a:hover {
+  color: #888;
+  text-decoration: underline;
+}
+
+.nav {
+  font-size: 19px;
+}
+.nav a {
+  color: #fff;
+}
+.nav a:hover {
+  color: #888;
+}
+
+.nav .last {
+  float: right;
+}
+.nav form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.nav input {
+  width: 164px;
+  border: 1px solid #444;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  float: right;
+  height: 1.5em;
+  margin: -2px 0 0 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+}
+.nav input:hover {
+  Zborder: 1px solid #ccc;
+  background: #333;
 }
 
 .feed {
   padding: 0 0 0 19px;
   background: url("feed.png") no-repeat 0 50%;
-  font-weight: bold !important;
-  font-size: 13px;
+}
+.twitter h3 a {
+  padding: 0 0 0 21px;
+  background: url("t_mini-c.png") no-repeat 0 50%;
 }
 
 
-#sidebar ul.bullet
-{
-  list-style: disc outside;
-  margin-left: 16px;
-  color: #aaa;
-}
-#sidebar ul.bullet li
-{
-  margin: 0 0 6px 0;
-}
-
-#side1
-{
-  float: left;
-  width: 165px;
-  margin: 0 0 0 16px;
-  padding: 10px 16px 0 0;
-  overflow: hidden;
-  border-right: 1px solid #eee;
-}
-
-#side2
-{
-  float: left;
-  width: 166px;
-  margin: 0 0 0 16px;
-  padding: 10px 0 0 0;
-  overflow: hidden;
-}
-
-#footer
-{
-  clear: both;
-  margin: 0 auto;
-  padding: 10px;
+#footer {
   background: #000;
-  border-top: 3px solid #888; 
+  color: #888;
   text-align: center;
-  color: #ddd;
-  font-size: 11px;
+  font-size: 12px;
+  padding: 8px 0 16px 0;
 }
-#footer a
-{
-  color: #fff;  
-  text-decoration: underline;
+#footer a:hover {
+  color: #fff;
 }
 
-ol.coms {
-  list-style: outside decimal;
-}
-ol.coms li {
-  padding: 10px 0 2px 0;
-}
 
-#preview-comment {
-  margin: 12px 0 0 0;
+hr {
+  border: none;
+  border-top: 1px dotted #ddd;
+  margin: 0 0 30px 0;
 }
 
 form {
-  padding: 10px 0 50px 0;
+  padding: 10px 0 30px 0;
 }
 
 form p {
@@ -475,9 +352,9 @@ form a {
 textarea {
   width: 100%;
   height: 200px;
-  font-size: 13px;
+  font-size: 14px;
   margin: 4px 0 4px 0;
-  font-family: "Trebuchet MS";
+  font-family: georgia,'Trebuchet MS',Helvetica,"Lucida Grande";
 }
 
 label {
@@ -486,11 +363,12 @@ label {
 }
 
 input {
-  width: 200px;
+  width: 150px;
   float: left;
   clear: both;
-  font-size: 13px;
+  font-size: 14px;
   margin: 4px 0 4px 0;
+  font-family: georgia,'Trebuchet MS',Helvetica,"Lucida Grande";
 }
   
 input[type=submit], input[type=button] {
@@ -501,7 +379,6 @@ input[type=submit], input[type=button] {
 }
 
 /* ###### */
-
 .jsh-php .comment { color: #808080; }
 .jsh-php .single-string { color: #800000; }
 .jsh-php .double-string { color: #800000; }
@@ -555,7 +432,6 @@ input[type=submit], input[type=button] {
 .jsh-xml .entity { color: #7DFDFA; }
 
 /* embedded */
-
 .jsh-xml .php .comment { color: #FF7D27; }
 .jsh-xml .php .single-string { color: #AA6950; }
 .jsh-xml .php .double-string { color: #FF9E7B; }
@@ -581,5 +457,3 @@ input[type=submit], input[type=button] {
 .jsh-xml .css .color { color: #888; }
 .jsh-xml .css .media { color: #7DFDFA; }
 .jsh-xml .css .pseudo { color: #7DFDFA; }
-
-
