@@ -1,7 +1,6 @@
 <div class="meta">
 <p>{%= (new Date).toDateString() %}</p>
-<p><strong>{% if (site) : %}
-<a href="{%= site %}">{%= user %}</a>{% else : %}{%= user %}{% end %}</strong></p>
+<p>{% if (site) : %}<a href="{%= site %}">{%= user %}</a>{% else : %}{%= user %}{% end %}</p>
 <p>[PREVIEW]</p>
 </div>
 <div class="entry">{%:h:m= content %}</div>
