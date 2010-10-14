@@ -41,6 +41,7 @@ blog::blog()
     dispatcher::bind("try_login",&blog::on_try_login);
     dispatcher::bind("feed",     &blog::on_feed);
     dispatcher::bind("tweetsg",  &blog::on_tweetsg);
+    dispatcher::bind("feed_comments", &blog::on_feed_comments);
 
     dispatcher::bind("admin_index",    &admin_type::on_index, adm);
     dispatcher::bind("admin_edit",     &admin_type::on_edit, adm);
@@ -48,6 +49,8 @@ blog::blog()
     dispatcher::bind("admin_new",      &admin_type::on_new, adm);
     dispatcher::bind("admin_new_post", &admin_type::on_new_post, adm);
     dispatcher::bind("admin_preview",  &admin_type::on_preview, adm);
+    dispatcher::bind("admin_genfeed",  &admin_type::on_genfeed, adm);
+    dispatcher::bind("admin_genfeed_comments",  &admin_type::on_genfeed_comments, adm);
 
     dispatcher::set_fatal("__500__");
     router::set_source(util::file_loader::load("js/router.js"));
@@ -218,9 +221,33 @@ bool blog::on_feed()
     if (!cache.has("feed")) {
         view.assign("posts", mod.get_posts_for_feed(10));
         cache.add("feed", view.render("feed.post"));
+
+        std::ofstream feed("pub/feed.atom");
+        if (feed.is_open()) {
+            feed << cache.get("feed");
+            feed.flush();
+        }
     }
     response << header("Content-type", "application/atom+xml; charset=utf-8")
              << cache.get("feed");
+    return true;
+}
+
+
+bool blog::on_feed_comments()
+{
+    if (!cache.has("feed_comments")) {
+        view.assign("comments", mod.get_comments_for_feed());
+        cache.add("feed_comments", view.render("feed.comment"));
+
+        std::ofstream feed("pub/feed_comments.atom");
+        if (feed.is_open()) {
+            feed << cache.get("feed_comments");
+            feed.flush();
+        }
+    }
+    response << header("Content-type", "application/atom+xml; charset=utf-8")
+             << cache.get("feed_comments");
     return true;
 }
 

@@ -20,6 +20,7 @@ var/*
 template/sidebar.tweets.html
 
 pub/feed.atom
+pub/feed_comments.atom
 
 blog.config
 blog.creator

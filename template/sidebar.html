@@ -1,7 +1,8 @@
 
 <div id="side1">  
 <ul> 
-<li><a class="feed" href="http://blog.runpac.com/feed">Subscribe</a></li>
+<li><a class="feed" href="http://blog.runpac.com/feed">Posts</a></li>
+<li><a class="feed" href="http://blog.runpac.com/feed/comments">Comments</a></li>
 </ul>
   
 <h3>Categories</h3>
@@ -21,7 +22,7 @@
 <h3>Latest Comments</h3> 
 <ul class="bullet">
 {% for (i in recentComs) :%}
- <li><a href="/post/{%= recentComs[i]._id %}#comments">{%= recentComs[i].title %}</a></li>
+ <li><a href="/post/{%= recentComs[i].post._id %}#comments">{%= recentComs[i].user %}</a> - {%= recentComs[i].post.title %}</li>
 {%end%}
 </ul> 
 </div>

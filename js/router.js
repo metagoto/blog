@@ -25,6 +25,10 @@ routes = {
     pat: /^feed$/
   },
 
+  feed_comments: {
+    pat: /^feed\/comments$/
+  },
+
   preview: {
     pat: /^preview$/,
     GET: "blank"
@@ -52,6 +56,14 @@ routes = {
   admin_preview: {
     pat: /^adm\/preview$/,
     GET: "blank"
+  },
+
+  admin_genfeed : {
+    pat: /^adm\/genfeed$/,
+  },
+
+  admin_genfeed_comments : {
+    pat: /^adm\/genfeed\/comments$/,
   },
 
   login: {
