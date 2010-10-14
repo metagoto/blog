@@ -91,6 +91,19 @@ struct admin
         return send(view().render("admin/preview"));
     }
 
+    bool on_genfeed()
+    {
+        if (!logged()) return owner.on_error404();
+        cache().del("feed");
+        return owner.on_feed();
+    }
+
+    bool on_genfeed_comments()
+    {
+        if (!logged()) return owner.on_error404();
+        cache().del("feed_comments");
+        return owner.on_feed_comments();
+    }
 
 
     bool logged()

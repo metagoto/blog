@@ -50,6 +50,7 @@ struct blog
     bool on_blank();
 
     bool on_feed();
+    bool on_feed_comments();
 
     bool on_tweetsg();
 

@@ -9,11 +9,7 @@ function (limit) {
             .limit(limit);
 
     for (var i = 0, x; x = a[i]; ++i) {
-        //fillPostMeta(x);
-        //delete x._tags;
-        //delete x._cats;
 
-        //x.numComs = x.coms.length;
         delete x.coms;
 
         r.push(x);

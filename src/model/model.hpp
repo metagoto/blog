@@ -50,7 +50,7 @@ struct model
         register_mongo_func("getPostRaw");
         register_mongo_func("getPostsForFeed");
         register_mongo_func("addRecentComment");
-
+        register_mongo_func("getCommentsForFeed");
     }
 
 
@@ -92,7 +92,7 @@ struct model
         return ret;
     }
 
-    entity get_recent_comments(int limit = 10)
+    entity get_recent_comments()
     {
         static mongo::BSONObj info;
         mongo::BSONElement ret;
@@ -169,6 +169,15 @@ struct model
         mongo::BSONElement ret;
         mongo::BSONObj args = BSON("0" << limit);
         db.eval(ns_db, "function (limit) { return getPostsForFeed(limit); }", info, ret, &args); //bool ok
+        return ret;
+    }
+
+    entity get_comments_for_feed()
+    {
+        static mongo::BSONObj info;
+        mongo::BSONElement ret;
+        mongo::BSONObj args; // = BSON("0" << limit);
+        db.eval(ns_db, "function () { return getCommentsForFeed(); }", info, ret, &args); //bool ok
         return ret;
     }
 
@@ -287,7 +296,6 @@ struct model
         ));
 
         add_recent_comment(id, user);
-
         return true;
     }
 

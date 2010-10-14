@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+{% 
+var dateMe = function(d) {
+  d = d || new Date();
+  var pad = function (n) { return ((n < 10) ? '0' : '') + n; }
+  return d.getUTCFullYear() + '-' +
+    pad(d.getUTCMonth()+1) + '-' +
+    pad(d.getUTCDate()) + 'T' +
+    pad(d.getUTCHours()) + ':' +
+    pad(d.getUTCMinutes()) + ':' +
+    pad(d.getUTCSeconds()) + 'Z';
+};
+%}
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>metagoto's blog - comments</title>
+<subtitle>latest comments</subtitle>
+<link href="http://blog.runpac.com/feed/comments" rel="self" type="application/atom+xml" />
+<link href="http://blog.runpac.com" rel="alternate" type="text/html" />
+<id>tag:blog.runpac.com,2009-10-08:/feed/comments</id> 
+<updated>{%= dateMe() %}</updated>
+<author><name>metagoto</name></author>
+{% for (i in comments) : %}
+<entry>
+<title>{%= comments[i].post.title %} - {%= comments[i].user %}</title>
+<link href="http://blog.runpac.com/post/{%= comments[i].post._id %}" rel="alternate" type="text/html" />
+<id>tag:blog.runpac.com,{%= comments[i].date.getUTCFullYear()+':/'+comments[i].date.getTime()%}/c</id>
+<updated>{%= dateMe(comments[i].date) %}</updated>
+<author><name>{%= comments[i].user %}</name></author>
+<content type="html"><![CDATA[{%:h:m= comments[i].content %}]]></content>
+</entry>
+{% end %}
+</feed>
