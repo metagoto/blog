@@ -1,0 +1,13 @@
+<h2 class="info">Archives</h2>
+<ul class="simple">
+{% var y = 0; for (i in posts) : %}
+  {% var t = posts[i].date.getUTCFullYear(); %}
+  <li>
+  {% if (t != y && (y = t)) :%}
+    <p>&nbsp;</p>
+    <div class="meta"><p>{%:r= y %}</p></div>
+  {%end%}
+  <h2><a href="/post/{%= posts[i]._id %}">{%= posts[i].title %}</a></h2>
+  </li>
+{% end %}
+</ul>

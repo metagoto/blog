@@ -35,25 +35,18 @@ struct blog
     bool on_index();
     bool on_about();
     bool on_help();
-
     bool on_post();
     bool on_category();
     bool on_tag();
-
+    bool on_archives();
     bool on_post_post();
-
     bool on_com_preview();
-
     bool on_login();
     bool on_try_login();
-
     bool on_blank();
-
     bool on_feed();
     bool on_feed_comments();
-
     bool on_tweetsg();
-
 
 private:
     void make_stuff();

@@ -34,6 +34,7 @@ blog::blog()
     dispatcher::bind("post",     &blog::on_post);
     dispatcher::bind("category", &blog::on_category);
     dispatcher::bind("tag",      &blog::on_tag);
+    dispatcher::bind("archives", &blog::on_archives);
     dispatcher::bind("post_post",&blog::on_post_post);
     dispatcher::bind("preview",  &blog::on_com_preview);
     dispatcher::bind("blank",    &blog::on_blank);
@@ -107,7 +108,7 @@ bool blog::on_index()
         view.assign("posts", mod.get_posts(pagi.offset, items_per_page));
         view.assign("content", view.render("index.content"));
         make_stuff();
-        view.assign("title", "Index");
+        view.assign("title", "Home");
         cache.add("index", key, view.render("main"));
     }
     return send(cache.get(key));
@@ -213,6 +214,19 @@ bool blog::on_tag()
         cache.add(parent_key, key, view.render("main"));
     }
     return send(cache.get(key));
+}
+
+
+bool blog::on_archives()
+{
+    if (!cache.has("archives")) {
+        view.assign("posts", mod.get_recent_posts(mod.count_posts()));
+        view.assign("content", view.render("archives.content"));
+        make_stuff();
+        view.assign("title", "Archives");
+        cache.add("archives", view.render("main"));
+    }
+    return send(cache.get("archives"));
 }
 
 

@@ -4,7 +4,7 @@ function (limit) {
 
     var r = [];
 
-    var a = db.post.find( { }, { _id:1, title:1 } )
+    var a = db.post.find( { }, { _id:1, title:1, date:1 } )
             .sort( { date: -1 } )
             .limit(limit);
 

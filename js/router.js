@@ -21,6 +21,10 @@ routes = {
     map: {1: "id", 2: "page"}
   },
 
+  archives: {
+    pat: /^archives$/
+  },
+
   feed: {
     pat: /^feed$/
   },
